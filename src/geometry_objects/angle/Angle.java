@@ -174,5 +174,6 @@ public class Angle implements Comparable<Angle>
 	public boolean equals(Object obj)
 	{
 		// TODO
+		this.
 	}
 }

@@ -38,5 +38,9 @@ public class TriangleIdentifier
 	private void computeTriangles()
 	{
 		// TODO
+		//get three segments
+		//if two segments share a vertex and have an angle of greater than 0
+		//and that works for all three segment verticies
+		//create a new list of segments and create a new triangle and add to database
 	}
 }

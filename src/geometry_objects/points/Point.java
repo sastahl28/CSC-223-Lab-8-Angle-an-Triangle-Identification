@@ -129,6 +129,7 @@ public class Point implements Comparable<Point>
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		
 		//check if obj is null or of different class
 		if (obj == null) return false;
 		if (obj.getClass() != this.getClass()) return false;

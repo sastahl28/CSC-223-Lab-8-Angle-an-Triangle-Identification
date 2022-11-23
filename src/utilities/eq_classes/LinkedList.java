@@ -1,4 +1,4 @@
-package utilities;
+package utilities.eq_classes;
 
 /**
 * A singly linked list...yay...
@@ -110,12 +110,12 @@ public class LinkedList <Item> {
 	 */
 	private Node<Item> previousHelper(Node<Item> prev, Node<Item> curr, Item target) {
 		//if not contained or first item in list (cannot have null prev)
-		if (curr == _tail || _head._next._data == target) {
+		if (curr == _tail || _head._next._data.equals(target)) {
 			//System.out.println("NULL");
 			return null;
 		}
 		//if contained
-		if (curr._data == target) {
+		if (curr._data.equals(target)) {
 			//System.out.println("TARGET FOUND: " + prev._data);
 			return prev;
 		}
@@ -262,7 +262,7 @@ public class LinkedList <Item> {
 		
 		while (curr != _tail) {
 			//check if current nodes data matches target 
-			if (curr._data == target) {
+			if (curr._data.equals(target)) {
 				//set prev node's next to curr node's next to skip/delete node
 				prev._next = curr._next;
 				//decrease size
@@ -296,9 +296,11 @@ public class LinkedList <Item> {
 	 * @return item at specified index
 	 */
 	public Item getIndex(int index) {
+		//TODO check if valid
+		if (index > size()) return null;
 		//start at head
-		Node<Item>curr = _head;
-		for (int i = 0; i <= index; i += 1) {
+		Node<Item>curr = _head._next;
+		for (int i = 1; i <= index; i++) {
 			//get next node
 			curr = curr._next;
 		}

@@ -1,4 +1,4 @@
-package utilities;
+package utilities.eq_classes;
 import java.util.Comparator;
 /**
  * A LinkedEquivalence Class, determines if an object "belongs" 
@@ -71,7 +71,7 @@ public class LinkedEquivalenceClass<T> {
 	 */
 	public int size() {
 		//if canonical is not null size = linked list size + 1
-		if (!(_canonical == null)) return _rest._size + 1;
+		if (_canonical != null) return _rest._size + 1;
 		//return the size of the rest of the linked list 
 		return _rest.size();
 	}
@@ -103,8 +103,9 @@ public class LinkedEquivalenceClass<T> {
 	 */
 	public boolean contains(T target) {
 		//TODO test
+		if (target == null || _canonical == null) return false;
 		//check if target is canonical or in linked list
-		if (_canonical == target || _rest.contains(target)) return true;
+		if (_canonical.equals(target) || _rest.contains(target)) return true;
 		//not contained
 		return false;
 	}

@@ -23,4 +23,13 @@ import utilities.eq_classes.EquivalenceClasses;
 public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 {
 	// TODO
+	//i think we just need to call every method from the equivalence class
+	//but with the methods from other class
+	 public AngleEquivalenceClasses() { 
+		 //must call the super constructor but idk what the problem is tbh
+		 super();
+	 }
+		
+		
+	
 }

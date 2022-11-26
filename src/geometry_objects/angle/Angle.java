@@ -176,6 +176,5 @@ public class Angle implements Comparable<Angle>
 		// TODO
 		 return this.equals(obj);
 		
-		
 	}
 }

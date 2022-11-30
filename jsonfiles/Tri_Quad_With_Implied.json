@@ -1,0 +1,36 @@
+//          G   H
+//         / \ / \
+//        /   X   \
+//       E\  / \ /F        
+//          C---D
+//          |   |
+//          A---B
+// X is not a real point-> Implied point
+
+{"Figure" :
+	{ "Description" : "Tri Quad Shape .",
+		"Points" : [
+			{ "name": "A", "x" : 4, "y" : 0 },
+			{ "name": "B", "x" : 8, "y" : 0 },
+			{ "name": "C", "x" : 4, "y" : 5 },
+			{ "name": "D", "x" : 8, "y" : 5 },
+			{ "name": "E", "x" : 0, "y" : 10},
+			{ "name": "F", "x" : 12, "y" : 10},
+			{ "name": "G", "x" : 4, "y" : 12},
+			{ "name": "H", "x" : 8, "y" : 12},
+
+		],
+
+		"Segments" :  [
+			{"A" : ["C", "B"] },
+			{"B" : ["A", "D"] },
+			{"C" : ["A", "E", "H"] },
+			{"D" : ["C", "F", "G"] },
+			{"E" : ["C", "G"] },
+			{"F" : ["D", "H"] },
+			{"G" : ["E", "D"] },
+			{"H" : ["C", "F"] },
+
+		]
+	}
+}

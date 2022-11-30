@@ -1,0 +1,34 @@
+{ 
+"Figure" :
+  { "Description" : "One line segment consisting of two points on y-axis.",
+    "Points" :
+	  [
+	    {
+	      "name" : "A",
+		  "x" : 3,
+   	      "y" : 0
+		},
+	    {
+	      "name" : "B",
+		  "x" : 3,
+   	      "y" : 5
+		}
+	   {
+	      "name" : "C",
+		  "x" : 0,
+   	      "y" : 4
+		}
+	   {
+	      "name" : "C",
+		  "x" : 5,
+   	      "y" : 4
+		}
+	  ],
+  
+    "Segments" :
+      [
+	    {"A" : ["B"] }
+	    {"C" : ["D"] }
+      ]
+  }
+}

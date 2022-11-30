@@ -1,3 +1,5 @@
+package geometry_objects.angle.comparators;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -153,7 +155,7 @@ class AngleStructureComparatorTest {
 
 	}
 	
-	//Don't share points
+	//Don’t share points
 	@Test
 	void ShareNoPoints() throws FactException {
 		Point P1 = new Point(3,5);

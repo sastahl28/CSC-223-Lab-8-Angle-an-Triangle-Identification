@@ -58,6 +58,51 @@ public class AngleStructureComparator implements Comparator<Angle>
 	@Override
 	public int compare(Angle left, Angle right)
 	{
-        // TODO
+		//Check that the angles are structurally equivalent
+        if (!(left.overlays(right))){
+        	
+        	return Integer.MAX_VALUE;
+        	
+        }
+        
+        //check that both left rays overlap both right rays
+        Segment rayLeft1 = left.getRay1();
+        Segment rayLeft2 = left.getRay2();
+        
+        if ((right.overlayingRay(rayLeft1) != null) && (right.overlayingRay(rayLeft2) != null)) {
+        	
+        	return 1;
+        	
+        }
+        
+        //check that both right rays overlap both left rays
+        Segment rayRight1 = right.getRay1();
+        Segment rayRight2 = right.getRay2();
+        
+        if ((left.overlayingRay(rayRight1) != null) && (left.overlayingRay(rayRight2) != null)) {
+        	
+        	return -1;
+        	
+        }
+        
+        //Check that one of the right rays overlaps a left ray 
+        //and that one of the left rays overlaps a right ray
+        if((left.overlayingRay(rayRight1) != null) && (right.overlayingRay(rayLeft1) != null)) {
+        	return 0;
+        }
+        
+        if((left.overlayingRay(rayRight2) != null) && (right.overlayingRay(rayLeft1) != null)) {
+        	return 0;
+        }
+        
+        if((left.overlayingRay(rayRight1) != null) && (right.overlayingRay(rayLeft2) != null)) {
+        	return 0;
+        }
+        
+        if((left.overlayingRay(rayRight2) != null) && (right.overlayingRay(rayLeft2) != null)) {
+        	return 0;
+        }
+		
+        return 12;        
 	}
 }

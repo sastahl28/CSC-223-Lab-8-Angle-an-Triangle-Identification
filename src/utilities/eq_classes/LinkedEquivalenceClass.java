@@ -102,7 +102,6 @@ public class LinkedEquivalenceClass<T> {
 	 * @return True if contained
 	 */
 	public boolean contains(T target) {
-		//TODO test
 		if (target == null || _canonical == null) return false;
 		//check if target is canonical or in linked list
 		if (_canonical.equals(target) || _rest.contains(target)) return true;
@@ -111,7 +110,6 @@ public class LinkedEquivalenceClass<T> {
 	}
 	
 	public boolean belongs(T target) {
-		//TODO test
 		//returns whether the target belongs in the equivalence class
 		if (_comparator.compare(_canonical, target) == 0) return true;
 		return false;
@@ -142,7 +140,6 @@ public class LinkedEquivalenceClass<T> {
 	 * @return True if successful 
 	 */
 	public boolean removeCanonical() {
-		//TODO test
 		//if canonical is null or list is empty
 		if ((_canonical == null) || (_rest.isEmpty())) return false;
 		

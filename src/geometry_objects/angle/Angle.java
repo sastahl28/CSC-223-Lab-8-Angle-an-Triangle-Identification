@@ -173,8 +173,16 @@ public class Angle implements Comparable<Angle>
 	@Override
 	public boolean equals(Object obj)
 	{
-		// TODO
-		 return this.equals(obj);
+		Angle object = (Angle)obj;
+		
+		if (this._ray1Endpoint.equals(object._ray1Endpoint) || this._ray1Endpoint.equals(object._ray2Endpoint)) {
+			if (this._ray2Endpoint.equals(object._ray1Endpoint) || this._ray2Endpoint.equals(object._ray2Endpoint)) {
+				return true;
+			}
+		}
+		
+		return false;
+
 		
 	}
 }

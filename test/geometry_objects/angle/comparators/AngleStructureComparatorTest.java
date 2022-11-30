@@ -1,3 +1,5 @@
+package geometry_objects.angle.comparators;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;

@@ -25,7 +25,7 @@ public class TriangleIdentifier
 	 * Compute the figure triangles on the fly when requested;
 	 * memoize results for subsequent calls.
 	 */
-	public Set<Triangle> getTriangles() throws FactException
+	public Set<Triangle> getTriangles() 
 	{
 		if (_triangles != null) return _triangles;
 
@@ -36,7 +36,7 @@ public class TriangleIdentifier
 		return _triangles;
 	}
 
-	private void computeTriangles() throws FactException
+	private void computeTriangles() 
 	{
 		//TODO
 		//begin with a segment from given segments
@@ -192,5 +192,5 @@ public class TriangleIdentifier
 
 
 
-}
+
 }

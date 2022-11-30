@@ -63,8 +63,7 @@ public class TriangleIdentifier
 					trigSegments.add(seg3);
 
 
-					try
-					{Triangle trig = new Triangle(trigSegments);
+				
 
 
 
@@ -83,18 +82,24 @@ public class TriangleIdentifier
 									!seg1.sharedVertex(seg2).equals(seg2.sharedVertex(seg3)) &&
 									!seg1.sharedVertex(seg3).equals(seg2.sharedVertex(seg3))) 
 							{
+								//create the triangle
+								try
+								{Triangle trig = new Triangle(trigSegments);
+								//add the triangle to the 
 								_triangles.add(trig);
+								}
+								
+								catch(FactException trig) {
+								}
+
 							}
 
 						}
-					}
-					}
-
-
-					catch(FactException trig) {
-
+					
 					}
 
+
+					
 
 
 

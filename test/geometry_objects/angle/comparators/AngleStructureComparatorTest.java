@@ -155,7 +155,7 @@ class AngleStructureComparatorTest {
 
 	}
 	
-	//Don't share points
+	//Don’t share points
 	@Test
 	void ShareNoPoints() throws FactException {
 		Point P1 = new Point(3,5);

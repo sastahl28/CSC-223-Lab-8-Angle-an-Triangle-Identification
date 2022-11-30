@@ -174,6 +174,7 @@ public class Angle implements Comparable<Angle>
 	public boolean equals(Object obj)
 	{
 		// TODO
+		//literally no idea if this is correct
 		 return this.equals(obj);
 		
 	}

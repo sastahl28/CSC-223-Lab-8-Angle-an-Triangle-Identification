@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
 
 import exceptions.FactException;
 import geometry_objects.Segment;
@@ -24,7 +25,7 @@ public class TriangleIdentifier
 	 * Compute the figure triangles on the fly when requested;
 	 * memoize results for subsequent calls.
 	 */
-	public Set<Triangle> getTriangles()
+	public Set<Triangle> getTriangles() throws FactException
 	{
 		if (_triangles != null) return _triangles;
 
@@ -35,7 +36,7 @@ public class TriangleIdentifier
 		return _triangles;
 	}
 
-	private void computeTriangles()
+	private void computeTriangles() throws FactException
 	{
 		//TODO
 		//begin with a segment from given segments
@@ -54,44 +55,52 @@ public class TriangleIdentifier
 
 
 					//create a list of the segments
-					List<Segment> segmentList = new List<Segment>();
+					List<Segment> trigSegments = new ArrayList<Segment>();
 
 					//add segments to the list
-					segmentList.add(seg1);
-					segmentList.add(seg2);
-					segmentList.add(seg3);
+					trigSegments.add(seg1);
+					trigSegments.add(seg2);
+					trigSegments.add(seg3);
 
 
-					Triangle trig = new Triangle(segmentList); 
-					
+					try
+					{Triangle trig = new Triangle(trigSegments);
+
+
+
+
 					//check that no segments are colinear
 					//if they are there would be a 180 angle and not  triangle
 					if(!seg1.isCollinearWith(seg2) && !seg1.isCollinearWith(seg3) && !seg2.isCollinearWith(seg3)) {
-						
+
 						//check that there is a shared vertex
 						if( !(seg1.sharedVertex(seg2) == null) && !(seg1.sharedVertex(seg3) == null) 
 								&& !(seg2.sharedVertex(seg3)==null))
 						{
-							
-							//check that these shared verticies are not the same 
+
+							//check that these shared vertices are not the same 
 							if(!seg1.sharedVertex(seg2).equals(seg1.sharedVertex(seg3)) && 
 									!seg1.sharedVertex(seg2).equals(seg2.sharedVertex(seg3)) &&
 									!seg1.sharedVertex(seg3).equals(seg2.sharedVertex(seg3))) 
 							{
 								_triangles.add(trig);
 							}
-							
+
 						}
-						
-						
-						
-						
-						
-						
-						
+					}
 					}
 
 
+					catch(FactException trig) {
+
+					}
+
+
+
+
+				}
+
+				/*
 
 					//check that no segmets are collinear
 					//if they are there would be a 180 angle and not  triangle
@@ -172,16 +181,16 @@ public class TriangleIdentifier
 					}
 
 
+				 */
 
 
-
-				}
 			}
-
 		}
 
-
-
-
 	}
+
+
+
+
+}
 }

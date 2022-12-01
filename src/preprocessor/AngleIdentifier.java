@@ -104,5 +104,35 @@ public class AngleIdentifier
 				
 			}
 		}
+		
+		/*
+		 * Set<Segment> segmentKeys = _segments.keySet(); List<Segment> segment2List =
+		 * new ArrayList<Segment>();
+		 * 
+		 * for(Segment s: segmentKeys) { segment2List.add(s); }
+		 * 
+		 * for (int i = 0; i < segmentKeys.size()-1; i++) { for (int j = i+1; j <
+		 * segmentKeys.size(); j++) {
+		 * 
+		 * Segment seg1 = segmentList.get(i); Segment seg2 = segmentList.get(j);
+		 * 
+		 * Point vertex = seg1.sharedVertex(seg2);
+		 * 
+		 * if (vertex != null) { if (!(seg1.HasSubSegment(seg2))){
+		 * if(!(seg2.HasSubSegment(seg1))) {
+		 * 
+		 * Angle angle = new Angle(seg1, seg2); _angles.add(angle);
+		 * 
+		 * }
+		 * 
+		 * } }
+		 * 
+		 * } }
+		 */
+		
+		
+		
+		
+		
 	}
 }

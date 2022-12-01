@@ -25,7 +25,7 @@ public class LinkedList <Item> {
 	
 	protected Node<Item> _head;
 	protected Node<Item> _tail;
-	protected int _size;
+	public int _size;
 	
 	/**
 	 * Creates a new LinkedList

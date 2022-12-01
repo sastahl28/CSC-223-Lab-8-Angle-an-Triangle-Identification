@@ -58,6 +58,10 @@ public class AngleStructureComparator implements Comparator<Angle>
 	@Override
 	public int compare(Angle left, Angle right)
 	{
+		if (left == null || right == null) {
+			return Integer.MAX_VALUE;
+		}
+		
 		//Check that the angles are structurally equivalent
         if (!(left.overlays(right))){
         	

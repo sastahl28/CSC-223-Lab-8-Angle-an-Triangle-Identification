@@ -129,14 +129,15 @@ public class Point implements Comparable<Point>
 	 */
 	@Override
 	public boolean equals(Object obj) {
+		Point objAsPoint = (Point) obj;
 		
 		//check if obj is null or of different class
-		if (obj == null) return false;
-		if (obj.getClass() != this.getClass()) return false;
+		if (objAsPoint == null) return false;
+		if (objAsPoint.getClass() != this.getClass()) return false;
 		
-		Point objAsPoint = (Point) obj;
+		
 		//check obj address and coordinates
-		if (this == obj) return true; 
+		if (this == objAsPoint) return true; 
 		if (MathUtilities.doubleEquals(this.getX(),objAsPoint.getX()) && 
 			MathUtilities.doubleEquals(this.getY(),objAsPoint.getY())) return true;
 		return false;

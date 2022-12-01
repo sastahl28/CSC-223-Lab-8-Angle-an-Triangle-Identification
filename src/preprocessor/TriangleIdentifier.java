@@ -40,75 +40,52 @@ public class TriangleIdentifier
 
 	private void computeTriangles() 
 	{
-		
+
 		//get a collection of the segments from the map of segments
-		Set<Segment> segmentKeys = _segments.keySet();
-		List<Segment> segmentList = new ArrayList<Segment>();
-		
-		for(Segment s: segmentKeys) {
-			segmentList.add(s);
-		}
+
+
+		List<Segment> segmentList = new ArrayList<Segment>(_segments.keySet());
+
 
 		//begin with a segment from given segments			
-		for(int i =0; i< segmentKeys.size()-1; i++) {
+		for(int i =0; i< segmentList.size()-2; i++) {
 
 			Segment seg1 = segmentList.get(i);
-					
-			for(int j = i+1; j <segmentKeys.size()-2; j++) {
-				
+
+			for(int j = i+1; j <segmentList.size()-1; j++) {
+
 				Segment seg2 = segmentList.get(j);
 
-				for(int k = j+1; j < segmentKeys.size()-3; k++) {
-					
+				for(int k = j+1; k < segmentList.size(); k++) {
+
 					Segment seg3 = segmentList.get(k);
 
 					//create a list of elements
 					List<Segment> trigSegments = new ArrayList<Segment>();
-					
+
 					//add segments to the list
 					trigSegments.add(seg1);
 					trigSegments.add(seg2);
 					trigSegments.add(seg3);
 
-/*
-						//check that no segments are colinear
-						if( !seg1.isCollinearWith(seg2) && !seg1.isCollinearWith(seg3) &&!seg2.isCollinearWith(seg3)) {
+					//create the triangle
+					try
+					{Triangle triangle = new Triangle(trigSegments);
 
-							//check that there is a shared vertex
-							if( !(seg1.sharedVertex(seg2) == null) && !(seg1.sharedVertex(seg3) == null) && !(seg2.sharedVertex(seg3)==null))
-							{
-								//check that the verticies are unique
-								if(!seg1.sharedVertex(seg2).equals(seg1.sharedVertex(seg3)) && 
-										!seg1.sharedVertex(seg2).equals(seg2.sharedVertex(seg3)) &&
-										!seg1.sharedVertex(seg3).equals(seg2.sharedVertex(seg3))) 
-								{*/
-									//create the triangle
-									try
-									{Triangle trig = new Triangle(trigSegments);
-
-									//add the triangle to the 
-									_triangles.add(trig);
-									}
-
-									catch(FactException trig) {
-										break;
-									}
-								}
-							}
-
+					//add the triangle to the 
+					_triangles.add(triangle);
 					}
 
-				}
-				
+					catch(FactException triangle) {
 
+					}
+				}
 			}
 
-/*		}
+		}
 
 	}
 
 
+}
 
-
-
-}*/

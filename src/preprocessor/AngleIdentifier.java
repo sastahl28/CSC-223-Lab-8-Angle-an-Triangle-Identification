@@ -76,7 +76,7 @@ public class AngleIdentifier
 	private void computeAngles() throws FactException
 	{
 		Set<Segment> allSegs = getAllSegments();
-		List<Segment> segmentList = new ArrayList<Segment>();
+		List<Segment> segmentList = new ArrayList<Segment>(getAllSegments());
 		
 		for(Segment s: allSegs) {
 			segmentList.add(s);

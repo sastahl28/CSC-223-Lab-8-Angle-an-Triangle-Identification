@@ -65,6 +65,7 @@ public class Preprocessor
 		//
 		_implicitPoints = ImplicitPointPreprocessor.compute(_pointDatabase, _givenSegments.stream().toList());
 
+		_implicitPoints.forEach(p -> {_pointDatabase.put(null, p.getX(), p.getY());});
 		//
 		// Implicit Segments attributed to implicit points
 		//

@@ -25,7 +25,7 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 	// TODO
 	//i think we just need to call every method from the equivalence class
 	//but with the methods from other class
-	 public AngleEquivalenceClasses() { super();
+	 public AngleEquivalenceClasses() { 
 	 }
 		
 		

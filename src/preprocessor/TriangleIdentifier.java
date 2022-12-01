@@ -1,6 +1,7 @@
 package preprocessor;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -39,157 +40,67 @@ public class TriangleIdentifier
 	private void computeTriangles() 
 	{
 		//TODO
-		//begin with a segment from given segments
-		for (int i = 0; i < _segments.size()-1; i++ ) {
+		//get a collection of the segments from the map of segments
+		Collection<Segment> segmentValues =_segments.values();	
 
-			//for each segment AFTER that segment, compare
-			for (int j = i+1; j < _segments.size(); j++) {
+		//begin with a segment from given segments			
+		for(Segment i: segmentValues) {
+			
+			Segment seg1 = i;
 
-				//for the segment after the previous one
-				for(int k = j+1; k < _segments.size(); k++) {
+			for(Segment j: segmentValues) {
+				
+				Segment seg2 = j;
 
-					//get the three segments in the map
-					Segment seg1 = _segments.get(i);
-					Segment seg2 = _segments.get(j);
-					Segment seg3 = _segments.get(k);
-
-
-					//create a list of the segments
+				for(Segment k: segmentValues) {
+					
+					Segment seg3 = k;
+					
+					//check that all segments are unique
+					if(!seg1.equals(seg2) && !seg1.equals(seg3) && !seg2.equals(seg3)) {
+					
+					//create a list of elements
 					List<Segment> trigSegments = new ArrayList<Segment>();
-
+					
 					//add segments to the list
 					trigSegments.add(seg1);
 					trigSegments.add(seg2);
 					trigSegments.add(seg3);
 
 
-				
+						//check that no segments are colinear
+						if( !seg1.isCollinearWith(seg2) && !seg1.coincideWithoutOverlap(seg3) &&!seg2.coincideWithoutOverlap(seg3)) {
 
-
-
-
-					//check that no segments are colinear
-					//if they are there would be a 180 angle and not  triangle
-					if(!seg1.isCollinearWith(seg2) && !seg1.isCollinearWith(seg3) && !seg2.isCollinearWith(seg3)) {
-
-						//check that there is a shared vertex
-						if( !(seg1.sharedVertex(seg2) == null) && !(seg1.sharedVertex(seg3) == null) 
-								&& !(seg2.sharedVertex(seg3)==null))
-						{
-
-							//check that these shared vertices are not the same 
-							if(!seg1.sharedVertex(seg2).equals(seg1.sharedVertex(seg3)) && 
-									!seg1.sharedVertex(seg2).equals(seg2.sharedVertex(seg3)) &&
-									!seg1.sharedVertex(seg3).equals(seg2.sharedVertex(seg3))) 
+							//check that there is a shared vertex
+							if( !(seg1.sharedVertex(seg2) == null) && !(seg1.sharedVertex(seg3) == null) && !(seg2.sharedVertex(seg3)==null))
 							{
-								//create the triangle
-								try
-								{Triangle trig = new Triangle(trigSegments);
-								//add the triangle to the 
-								_triangles.add(trig);
-								}
-								
-								catch(FactException trig) {
-								}
+								//check that the verticies are unique
+								if(!seg1.sharedVertex(seg2).equals(seg1.sharedVertex(seg3)) && 
+										!seg1.sharedVertex(seg2).equals(seg2.sharedVertex(seg3)) &&
+										!seg1.sharedVertex(seg3).equals(seg2.sharedVertex(seg3))) 
+								{
+									//create the triangle
+									try
+									{Triangle trig = new Triangle(trigSegments);
 
+									//add the triangle to the 
+									_triangles.add(trig);
+									}
+
+									catch(FactException trig) {
+										break;
+									}
+								}
 							}
 
 						}
-					
 					}
-
-
-					
-
-
 
 				}
-
-				/*
-
-					//check that no segmets are collinear
-					//if they are there would be a 180 angle and not  triangle
-					if(!seg1.isCollinearWith(seg2) && !seg1.isCollinearWith(seg3) && !seg2.isCollinearWith(seg3)) {
-
-						//check that the 
-						if(seg1.getPoint1().equals(seg2.getPoint1())) {
-
-
-							if(seg1.getPoint2().equals(seg3.getPoint1()) && seg2.getPoint2().equals(seg3.getPoint2())) {
-
-								//add the triangle to the list
-								_triangles.add(trig);
-							}
-
-							if(seg1.getPoint2().equals(seg3.getPoint2()) && seg2.getPoint2().equals(seg3.getPoint1())) {
-								//add the triangle to the hash map
-								_triangles.add(trig);
-							}
-
-						}
-
-						if(seg1.getPoint1().equals(seg2.getPoint2())) {
-
-
-							if(seg1.getPoint2().equals(seg3.getPoint1()) && seg2.getPoint1().equals(seg3.getPoint2())) {
-								//add the triangle to the hasmap
-								_triangles.add(trig);
-
-							}
-
-							if(seg1.getPoint2().equals(seg3.getPoint2()) && seg2.getPoint1().equals(seg3.getPoint1())) {
-								//add the triangle to the hash map
-								_triangles.add(trig);
-							}
-
-
-						}
-
-						if(seg1.getPoint1().equals(seg3.getPoint1())) {
-
-
-							if(seg1.getPoint2().equals(seg2.getPoint1()) && seg2.getPoint2().equals(seg3.getPoint2())) {
-								//add the triangle to the hasmap
-								_triangles.add(trig);
-
-							}
-
-							if(seg1.getPoint2().equals(seg2.getPoint2()) && seg2.getPoint1().equals(seg3.getPoint2())) {
-								//add the triangle to the hash map
-								_triangles.add(trig);
-							}
-
-
-						}
-
-						if(seg1.getPoint1().equals(seg3.getPoint2())) {
-
-
-							if(seg1.getPoint2().equals(seg2.getPoint1()) && seg2.getPoint2().equals(seg3.getPoint1())) {
-								//add the triangle to the hasmap
-								_triangles.add(trig);
-
-
-							}
-
-							if(seg1.getPoint2().equals(seg2.getPoint2()) && seg2.getPoint1().equals(seg3.getPoint1())) {
-								//add the triangle to the hash map
-								_triangles.add(trig);
-							}
-
-
-						}
-
-
-
-
-					}
-
-
-				 */
-
+				
 
 			}
+
 		}
 
 	}

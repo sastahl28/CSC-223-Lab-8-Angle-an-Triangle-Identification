@@ -7,7 +7,6 @@ public class FactException extends Exception
 	public FactException()
 	{
 		// TODO Auto-generated constructor stub
-		
 	}
 
 	public FactException(String message)

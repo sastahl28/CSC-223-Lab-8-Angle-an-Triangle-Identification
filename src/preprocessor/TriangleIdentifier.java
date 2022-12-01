@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import exceptions.FactException;
@@ -39,26 +40,28 @@ public class TriangleIdentifier
 
 	private void computeTriangles() 
 	{
-		//TODO
+		
 		//get a collection of the segments from the map of segments
-		Collection<Segment> segmentValues =_segments.values();	
+		Set<Segment> segmentKeys = _segments.keySet();
+		List<Segment> segmentList = new ArrayList<Segment>();
+		
+		for(Segment s: segmentKeys) {
+			segmentList.add(s);
+		}
 
 		//begin with a segment from given segments			
-		for(Segment i: segmentValues) {
-			
-			Segment seg1 = i;
+		for(int i =0; i< segmentKeys.size()-1; i++) {
 
-			for(Segment j: segmentValues) {
+			Segment seg1 = segmentList.get(i);
+					
+			for(int j = i+1; j <segmentKeys.size()-2; j++) {
 				
-				Segment seg2 = j;
+				Segment seg2 = segmentList.get(j);
 
-				for(Segment k: segmentValues) {
+				for(int k = j+1; j < segmentKeys.size()-3; k++) {
 					
-					Segment seg3 = k;
-					
-					//check that all segments are unique
-					if(!seg1.equals(seg2) && !seg1.equals(seg3) && !seg2.equals(seg3)) {
-					
+					Segment seg3 = segmentList.get(k);
+
 					//create a list of elements
 					List<Segment> trigSegments = new ArrayList<Segment>();
 					
@@ -67,9 +70,9 @@ public class TriangleIdentifier
 					trigSegments.add(seg2);
 					trigSegments.add(seg3);
 
-
+/*
 						//check that no segments are colinear
-						if( !seg1.isCollinearWith(seg2) && !seg1.coincideWithoutOverlap(seg3) &&!seg2.coincideWithoutOverlap(seg3)) {
+						if( !seg1.isCollinearWith(seg2) && !seg1.isCollinearWith(seg3) &&!seg2.isCollinearWith(seg3)) {
 
 							//check that there is a shared vertex
 							if( !(seg1.sharedVertex(seg2) == null) && !(seg1.sharedVertex(seg3) == null) && !(seg2.sharedVertex(seg3)==null))
@@ -78,7 +81,7 @@ public class TriangleIdentifier
 								if(!seg1.sharedVertex(seg2).equals(seg1.sharedVertex(seg3)) && 
 										!seg1.sharedVertex(seg2).equals(seg2.sharedVertex(seg3)) &&
 										!seg1.sharedVertex(seg3).equals(seg2.sharedVertex(seg3))) 
-								{
+								{*/
 									//create the triangle
 									try
 									{Triangle trig = new Triangle(trigSegments);
@@ -93,7 +96,6 @@ public class TriangleIdentifier
 								}
 							}
 
-						}
 					}
 
 				}
@@ -101,7 +103,7 @@ public class TriangleIdentifier
 
 			}
 
-		}
+/*		}
 
 	}
 
@@ -109,4 +111,4 @@ public class TriangleIdentifier
 
 
 
-}
+}*/

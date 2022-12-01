@@ -80,6 +80,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	 * 
 	 */
 	
+	//REMOVE?
 	@Override
 	public Angle canonical() {
 		return _canonical;
@@ -87,9 +88,11 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	
 	/**
 	 * Checks if the Linked Equivalence Class is empty
-	 * UNCHANGED
+	 * 
 	 * @return True if empty
 	 */
+	
+	//REMOVE?
 	@Override
 	public boolean isEmpty() {
 		//check that list is empty AND that canonical is null;
@@ -101,6 +104,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	/**
 	 * Clears the entire Linked Equivalence Class, including the canonical
 	 */
+	//REMOVE?
 	@Override
 	public void clear() {
 		//clear list AND clear canonical;
@@ -110,8 +114,9 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	
 	/**
 	 * Clears the Linked Equivalence Class but the canonical does not change
-	 * UNCHANGED
+	 *
 	 */
+	//REMOVE?
 	@Override
 	public void clearNonCanonical() {
 		//clear list but NOT canonical
@@ -121,8 +126,9 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	/**
 	 * Returns the size of the Linked Equivalence Class, including the canonical
 	 * @return
-	 * UNCHANGED
+	 * 
 	 */
+	//REMOVE?
 	@Override
 	public int size() {
 		//if canonical is not null size = linked list size + 1

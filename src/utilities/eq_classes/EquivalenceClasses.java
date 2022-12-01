@@ -45,7 +45,7 @@ public class EquivalenceClasses<T> {
 		//otherwise create a new equivalence class and set element as that classes canonical
 		LinkedEquivalenceClass<T> c = new LinkedEquivalenceClass<T>(_comparator);
 		c.demoteAndSetCanonical(element);
-		_classes.add(c);
+		 _classes.add(c);
 		return true;
 	}
 

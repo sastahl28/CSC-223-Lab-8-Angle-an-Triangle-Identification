@@ -1,10 +1,13 @@
 package preprocessor;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import exceptions.FactException;
 import geometry_objects.Segment;
+import geometry_objects.points.Point;
 import geometry_objects.angle.Angle;
 import geometry_objects.angle.AngleEquivalenceClasses;
 
@@ -32,8 +35,35 @@ public class AngleIdentifier
 		return _angles;
 	}
 
-	private void computeAngles()
+	private void computeAngles() throws FactException
 	{
 		// TODO
+		
+		for (int i = 0; i < _segments.size()-1; i++) {
+			for (int j = i+1; j < _segments.size(); j++) {
+				
+				Segment seg1 = _segments.get(i);
+				Segment seg2 = _segments.get(j);
+				
+				Point vertex = seg1.sharedVertex(seg2);
+				
+				if (vertex != null) {
+					if (!(seg1.HasSubSegment(seg2))){
+						
+						Angle angle = new Angle(seg1, seg2);
+						_angles.add(angle);
+						
+					}
+				}
+				
+			}
+		}
+		/**
+		 * ALG:
+		 * Compute minimal segments
+		 * Build angles out of minimal segments -> Should then be canonical
+		 * Using minimal and nonminimal segments make all other angles
+		 * 
+		 */
 	}
 }

@@ -27,7 +27,7 @@ class AngleIdentifierTest
 	
 	protected void init(String filename)
 	{
-		FigureNode fig = InputFacade.extractFigure("crossing_symmetric_triangle.json");
+		FigureNode fig = InputFacade.extractFigure("jsonfiles/crossing_symmetric_triangle.json");
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
 
@@ -52,7 +52,7 @@ class AngleIdentifierTest
 	@Test
 	void test_crossing_symmetric_triangle()
 	{
-		init("crossing_symmetric_triangle.json");
+		init("jsonfiles/crossing_symmetric_triangle.json");
 
 		AngleIdentifier angleIdentifier = new AngleIdentifier(_segments);
 

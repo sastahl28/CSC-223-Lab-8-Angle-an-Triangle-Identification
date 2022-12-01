@@ -1,5 +1,6 @@
 package preprocessor;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class AngleIdentifier
 	/*
 	 * Compute the figure triangles on the fly when requested; memoize results for subsequent calls.
 	 */
-	public AngleEquivalenceClasses getAngles()
+	public AngleEquivalenceClasses getAngles() throws FactException
 	{
 		if (_angles != null) return _angles;
 
@@ -37,13 +38,18 @@ public class AngleIdentifier
 
 	private void computeAngles() throws FactException
 	{
-		// TODO
+		Set<Segment> segmentKeys = _segments.keySet();
+		List<Segment> segmentList = new ArrayList<Segment>();
 		
-		for (int i = 0; i < _segments.size()-1; i++) {
-			for (int j = i+1; j < _segments.size(); j++) {
+		for(Segment s: segmentKeys) {
+			segmentList.add(s);
+		}	
+		
+		for (int i = 0; i < segmentKeys.size()-1; i++) {
+			for (int j = i+1; j < segmentKeys.size(); j++) {
 				
-				Segment seg1 = _segments.get(i);
-				Segment seg2 = _segments.get(j);
+				Segment seg1 = segmentList.get(i);
+				Segment seg2 = segmentList.get(j);
 				
 				Point vertex = seg1.sharedVertex(seg2);
 				

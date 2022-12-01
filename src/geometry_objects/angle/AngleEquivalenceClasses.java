@@ -2,6 +2,7 @@ package geometry_objects.angle;
 
 import geometry_objects.angle.comparators.AngleStructureComparator;
 import utilities.eq_classes.EquivalenceClasses;
+import utilities.eq_classes.LinkedEquivalenceClass;
 
 /**
  * Given the figure below:
@@ -26,6 +27,7 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 	//i think we just need to call every method from the equivalence class
 	//but with the methods from other class
 	 public AngleEquivalenceClasses() { 
+		 super(new AngleStructureComparator());
 	 }
 		
 	 @Override
@@ -40,7 +42,7 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 			}
 			
 			//otherwise create a new equivalence class and set element as that classes canonical
-			AngleLinkedEquivalenceClass c = new AngleLinkedEquivalenceClass(_comparator);
+			AngleLinkedEquivalenceClass c = new AngleLinkedEquivalenceClass();
 			c.demoteAndSetCanonical(element);
 			_classes.add(c);
 			return true;
@@ -56,7 +58,7 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 			//check if target is null
 			if (target == null) return false;
 			//check each class in classes and see if contains target
-			for (AngleLinkedEquivalenceClass c:_classes) {
+			for (LinkedEquivalenceClass<Angle> c:_classes) {
 				if (c.contains(target)) return true;
 			}
 			//item not contained
@@ -71,21 +73,12 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		public int size() {
 			//calculate # of items in all classes
 			int size = 0;
-			for (AngleLinkedEquivalenceClass c:_classes) {
+			for (LinkedEquivalenceClass<Angle> c:_classes) {
 				size += c.size();
 			}
 			return size;
 		}
 
-		/**
-		 * Returns the number of classes contained in the list
-		 * @return
-		 */
-		@Override
-		public int numClasses() {
-			//return size of list, list should not have duplicates
-			return _classes.size();
-		}
 
 		/**
 		 * Returns the index a particular class is located at; Returns -1 if
@@ -106,21 +99,7 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 			return -1;
 		}
 
-		/**
-		 * Returns a String representation of the contents of
-		 * each Linked Equivalence Class the arrayList
-		 * @return String 
-		 */
-		@Override
-		public String toString() {
-			StringBuilder s = new StringBuilder();
-			for (int i = 0; i < _classes.size(); i++) {
-				//add each item in arrayList to string on a new line
-				s.append(_classes.get(i).toString() + "\n");
-			}
-			//String representation of all the classes in arrayList 
-			return s.toString();
-		}
+
 		
 		
 	

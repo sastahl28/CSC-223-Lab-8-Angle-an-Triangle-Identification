@@ -34,9 +34,8 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	//add first element
 	@Test
 	void AddWithNoCanonical() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -54,7 +53,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void AddWithCanonical() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -78,7 +77,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void SmallerAngle() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -104,7 +103,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void FakeAngle() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -141,7 +140,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void DoesBelongBigger() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -164,7 +163,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void DoesBelongSmaller() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -187,7 +186,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void DoesNOTBelong() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -210,7 +209,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void NullBelong() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Point P1 = new Point(3,6);
 		Point P2 = new Point(0,0);
@@ -230,7 +229,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	void NullBelongTwo() throws FactException {
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass(ASC);
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
 		Angle angle1 = null;
 		

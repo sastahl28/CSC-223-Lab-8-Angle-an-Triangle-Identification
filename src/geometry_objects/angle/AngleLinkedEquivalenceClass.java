@@ -33,13 +33,11 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 {
 
 	
-	public AngleLinkedEquivalenceClass(AngleStructureComparator comparator) {
+	public AngleLinkedEquivalenceClass() {
 		
-		super(comparator);
-		_comparator = comparator;
-		_canonical = null;
-		_rest = new LinkedList<Angle>();
 		
+		
+		super(new AngleStructureComparator());
 	}
 	
 	@Override
@@ -80,62 +78,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	 * 
 	 */
 	
-	//REMOVE?
-	@Override
-	public Angle canonical() {
-		return _canonical;
-	}
-	
-	/**
-	 * Checks if the Linked Equivalence Class is empty
-	 * 
-	 * @return True if empty
-	 */
-	
-	//REMOVE?
-	@Override
-	public boolean isEmpty() {
-		//check that list is empty AND that canonical is null;
-		if (_canonical == null && _rest.isEmpty()) return true;
-		//if not empty
-		return false;
-	}
-	
-	/**
-	 * Clears the entire Linked Equivalence Class, including the canonical
-	 */
-	//REMOVE?
-	@Override
-	public void clear() {
-		//clear list AND clear canonical;
-		_canonical = null;
-		_rest.clear();
-	}
-	
-	/**
-	 * Clears the Linked Equivalence Class but the canonical does not change
-	 *
-	 */
-	//REMOVE?
-	@Override
-	public void clearNonCanonical() {
-		//clear list but NOT canonical
-		_rest.clear();
-	}
-	
-	/**
-	 * Returns the size of the Linked Equivalence Class, including the canonical
-	 * @return
-	 * 
-	 */
-	//REMOVE?
-	@Override
-	public int size() {
-		//if canonical is not null size = linked list size + 1
-		if (_canonical != null) return _rest._size + 1;
-		//return the size of the rest of the linked list 
-		return _rest.size();
-	}
+
 	
 	
 	/**
@@ -153,47 +96,6 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	}
 	
 	
-	/**
-	 * Removes the input target from the Linked Equivalence Class
-	 * @param target
-	 * @return True if successfully removed
-	 */
-	@Override
-	public boolean remove(Angle target) {
-		//if target item is canonical
-		if (target.equals(_canonical)) return removeCanonical();
-		
-		//check if in list
-		if(_rest.contains(target)) {
-			_rest.remove(target);
-			return true;
-		}
-		
-		//if cannot remove/not in list
-		return false;
-	}
-	
-	/**
-	 * Removes the current canonical and replaces with 
-	 * the first item in the rest of the list
-	 * @return True if successful 
-	 */
-	@Override
-	public boolean removeCanonical() {
-		//if canonical is null or list is empty
-		if ((_canonical == null) || (_rest.isEmpty())) return false;
-		
-		//get first item in rest
-		Angle firstItem = _rest.getIndex(0);
-		//remove first item from rest
-		_rest.remove(firstItem);
-		//set as new canonical
-		_canonical = firstItem;
-		//successfully removed
-		return true;
-		
-		
-	}
 	
 	/**
 	 * Adds previous Canonical to Linked Equivalence Class and sets input to new canonical
@@ -222,6 +124,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		_canonical = element;
 		return true;
 	}
+	
 	
 	/**
 	 * Returns a string representation of the Linked Equivalence Class

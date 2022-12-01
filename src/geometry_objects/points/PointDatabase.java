@@ -55,7 +55,9 @@ public class PointDatabase
 		
 	}
 
-	
+	public void put(Point p) {
+		put(p.getName(),p.getX(),p.getY());
+	}
 	
 	
 	/**

@@ -48,6 +48,7 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		
 		assertEquals(1, AEC.size());
 		
+		
 	}
 	
 	//add element larger than the canonical
@@ -101,6 +102,32 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		assertEquals(AEC.canonical(), angle1);
 		
 	}
+	
+	//add element smaller than the canonical
+		@Test
+		void BiggerSmallerAngle() throws FactException {
+			AngleStructureComparator ASC = new AngleStructureComparator();
+			
+			AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
+			
+			Point P1 = new Point(3,6);
+			Point P2 = new Point(0,0);
+			Point P3 = new Point(0,7);
+			
+			Angle angle1 = angleBuilder(P1,P2,P3);
+			
+			
+			Point P4 = new Point(4,8);
+			Point P5 = new Point(0,6);
+			
+			Angle angle2 = angleBuilder(P4, P2, P5);
+			
+			AEC.add(angle2);
+			
+			assertTrue(AEC.add(angle1));
+			assertEquals(2, AEC.size());
+			
+		}
 	
 	
 	//add element that DOES NOT BELONG

@@ -74,7 +74,7 @@ public class EquivalenceClasses<T> {
 		//calculate # of items in all classes
 		int size = 0;
 		for (LinkedEquivalenceClass<T> c:_classes) {
-			size += c.size();
+			size = size + c.size();
 		}
 		return size;
 	}

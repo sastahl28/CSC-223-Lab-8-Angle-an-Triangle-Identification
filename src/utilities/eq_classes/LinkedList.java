@@ -75,6 +75,8 @@ public class LinkedList <Item> {
 	private boolean containsHelper(Node<Item> curr, Item target) {
 		//if not contained
 		if (curr == _tail) return false;
+		
+		if (curr == null) return false;
 		//if contained
 		if (curr._data.equals(target)) return true;
 		
@@ -214,6 +216,7 @@ public class LinkedList <Item> {
 		//first node in list
 		Node<Item> curr = _head._next;
 		//call recursive containsHelper
+		
 		return containsHelper(curr, target);
 	}
 	

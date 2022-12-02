@@ -32,8 +32,6 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		
 	 @Override
 	 public boolean add(Angle element) {
-		 
-		 	if (contains(element))return false;
 			
 			int index = indexOfClass(element);
 			
@@ -83,7 +81,7 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 			//calculate # of items in all classes
 			int size = 0;
 			for (LinkedEquivalenceClass<Angle> c:_classes) {
-				size += c.size();
+				size = size + c.size();
 			}
 			return size;
 		}

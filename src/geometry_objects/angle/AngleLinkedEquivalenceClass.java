@@ -44,11 +44,14 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 	public boolean add(Angle element) {
 		
 		if (element == null) return false;
+		
 		if (this.contains(element)) return false;
+		
 		if (!(belongs(element)))return false;
 		
 		if (_canonical == null) {
 			_canonical = element;
+			return true;
 		}
 		
 		if (_comparator.compare(element, _canonical) == 1 || _comparator.compare(element, _canonical) == 0) {

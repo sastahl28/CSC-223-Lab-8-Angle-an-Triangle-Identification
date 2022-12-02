@@ -75,44 +75,52 @@ public class AngleIdentifier
 	
 	private void computeAngles() throws FactException
 	{
-		Set<Segment> allSegs = getAllSegments();
-		List<Segment> segmentList = new ArrayList<Segment>(getAllSegments());
+		List<Segment> segmentList = new ArrayList<Segment>(_segments.keySet());
+
+
+		/*
+		 * for (int i = 0; i < _segments.size()-1; i++) { for (int j = i+1; j <
+		 * _segments.size(); j++) {
+		 * 
+		 * Segment seg1 = _segments.get(i); Segment seg2 = _segments.get(j);
+		 * 
+		 * Point vertex = seg1.sharedVertex(seg2);
+		 * 
+		 * if (vertex != null) { if (!(seg1.HasSubSegment(seg2))){
+		 * 
+		 * Angle angle = new Angle(seg1, seg2); _angles.add(angle);
+		 */
 		
-		for(Segment s: allSegs) {
-			segmentList.add(s);
-		}
-		
-		for (int i = 0; i < allSegs.size()-1; i++) {
-			for (int j = i+1; j < allSegs.size(); j++) {
-				
-				Segment seg1 = segmentList.get(i);
+		//begin with a segment from given segments			
+		for(int i =0; i< segmentList.size()-1; i++) {
+
+			Segment seg1 = segmentList.get(i);
+
+			for(int j = i+1; j <segmentList.size(); j++) {
+
 				Segment seg2 = segmentList.get(j);
 				
 				Point vertex = seg1.sharedVertex(seg2);
 				
 				if (vertex != null) {
+					
 					if (!(seg1.HasSubSegment(seg2))){
-						if(!(seg2.HasSubSegment(seg1))) {
-							
-							Angle angle = new Angle(seg1, seg2);
-							_angles.add(angle);
-							
-						}
 						
+						if (!(seg2.HasSubSegment(seg1))) {
+						
+						Angle angle = new Angle(seg1, seg2);
+						
+						_angles.add(angle);
 					}
 				}
-				
 			}
+		
 		}
+	}
 		
 		/*
-		 * Set<Segment> segmentKeys = _segments.keySet(); List<Segment> segment2List =
-		 * new ArrayList<Segment>();
-		 * 
-		 * for(Segment s: segmentKeys) { segment2List.add(s); }
-		 * 
-		 * for (int i = 0; i < segmentKeys.size()-1; i++) { for (int j = i+1; j <
-		 * segmentKeys.size(); j++) {
+		 * for (int i = 0; i < allSegs.size()-1; i++) { for (int j = i+1; j <
+		 * allSegs.size(); j++) {
 		 * 
 		 * Segment seg1 = segmentList.get(i); Segment seg2 = segmentList.get(j);
 		 * 
@@ -129,6 +137,7 @@ public class AngleIdentifier
 		 * 
 		 * } }
 		 */
+		
 		
 		
 		

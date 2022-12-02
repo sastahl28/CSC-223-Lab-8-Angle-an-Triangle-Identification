@@ -69,11 +69,14 @@ public class LinkedEquivalenceClass<T> {
 	 * Returns the size of the Linked Equivalence Class, including the canonical
 	 * @return
 	 */
-	public int size() {
-		//if canonical is not null size = linked list size + 1
-		if (_canonical != null) return _rest._size + 1;
-		//return the size of the rest of the linked list 
-		return _rest.size();
+	/*
+	 * public int size() { //if canonical is not null size = linked list size + 1 if
+	 * (_canonical != null) return _rest._size + 1; //return the size of the rest of
+	 * the linked list return _rest.size(); }
+	 */
+	public int size()
+	{
+		return _rest.size() + 1;
 	}
 	
 	/**

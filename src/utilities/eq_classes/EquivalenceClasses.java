@@ -27,27 +27,28 @@ public class EquivalenceClasses<T> {
 		_classes = new ArrayList<LinkedEquivalenceClass<T>>();
 	}
 
-	/**
-	 * Creates 
-	 * @param element
-	 * @return true if addition was successful
-	 */
 	public boolean add(T element) {
-		//check if element null
-		if (element == null) return false;
-		//find index element belongs to and add to that class
+		
 		int index = indexOfClass(element);
-		if (!(index == -1)) {
-			_classes.get(index).add(element);
+		
+		//If the the location of the class does not exist, create a new LinkedEquivalenceClass to add the element to
+		if (index == -1) {
+			
+			LinkedEquivalenceClass<T> tempClass = new LinkedEquivalenceClass<T>(_comparator);
+			
+			tempClass.add(element);
+			
+			_classes.add(tempClass);
+			
 			return true;
 		}
 		
-		//otherwise create a new equivalence class and set element as that classes canonical
-		LinkedEquivalenceClass<T> c = new LinkedEquivalenceClass<T>(_comparator);
-		c.demoteAndSetCanonical(element);
-		 _classes.add(c);
-		return true;
+		//if the class does exist, add the element to it
+		return _classes.get(index).add(element);	
+		
+		
 	}
+	
 
 	/**
 	 * Checks if the arrayList contains the input target

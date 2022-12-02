@@ -32,20 +32,27 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		
 	 @Override
 	 public boolean add(Angle element) {
-			//check if element null
-			if (element == null) return false;
-			//find index element belongs to and add to that class
+		 
+		 	if (contains(element))return false;
+			
 			int index = indexOfClass(element);
-			if (!(index == -1)) {
-				_classes.get(index).add(element);
+			
+			//If the the location of the class does not exist, create a new LinkedEquivalenceClass to add the element to
+			if (index == -1) {
+				
+				AngleLinkedEquivalenceClass tempClass = new AngleLinkedEquivalenceClass();
+				
+				tempClass.add(element);
+				
+				_classes.add(tempClass);
+				
 				return true;
 			}
 			
-			//otherwise create a new equivalence class and set element as that classes canonical
-			AngleLinkedEquivalenceClass c = new AngleLinkedEquivalenceClass();
-			c.demoteAndSetCanonical(element);
-			_classes.add(c);
-			return true;
+			//if the class does exist, add the element to it
+			return _classes.get(index).add(element);	
+			
+			
 		}
 
 		/**
@@ -57,10 +64,12 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		public boolean contains(Angle target) {
 			//check if target is null
 			if (target == null) return false;
+			
 			//check each class in classes and see if contains target
 			for (LinkedEquivalenceClass<Angle> c:_classes) {
 				if (c.contains(target)) return true;
 			}
+			
 			//item not contained
 			return false;
 		}
@@ -88,13 +97,18 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		 */
 		@Override
 		protected int indexOfClass(Angle element) {
+			
 			//check if element is null
 			if (element == null) return -1;
+			
 			//index location element belongs to
 			for (int i = 0; i < _classes.size(); i++) {
+				
 				//check if target is equal to current item
 				if (_classes.get(i).belongs(element)) return i;
+				
 			}
+			
 			//not contained
 			return -1;
 		}

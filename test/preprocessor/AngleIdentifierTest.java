@@ -27,7 +27,7 @@ class AngleIdentifierTest
 	
 	protected void init(String filename)
 	{
-		FigureNode fig = InputFacade.extractFigure("jsonfiles/crossing_symmetric_triangle.json");
+		FigureNode fig = InputFacade.extractFigure(filename);
 
 		Map.Entry<PointDatabase, Set<Segment>> pair = InputFacade.toGeometryRepresentation(fig);
 
@@ -49,6 +49,7 @@ class AngleIdentifierTest
 	//
 	// This figure contains 44 angles
 	//
+	
 	@Test
 	void test_crossing_symmetric_triangle()
 	{
@@ -200,4 +201,378 @@ class AngleIdentifierTest
 
 		}
 	}
+	
+	
+	
+	
+	
+	
+	@Test
+	void test_collinear_line_segments()
+	{
+		init("jsonfiles/collinear_line_segments.json");
+
+		AngleIdentifier angleIdentifier = new AngleIdentifier(_segments);
+
+		AngleEquivalenceClasses computedAngles;
+		try {
+			computedAngles = angleIdentifier.getAngles();
+			
+			
+
+		// The number of classes should equate to the number of 'minimal' angles
+		assertEquals("Number of Angle Equivalence classes", 4, computedAngles.numClasses());
+		
+		//
+		// ALL original segments: 8 in this figure.
+		//
+		Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
+		Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
+		Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
+		Segment ae = new Segment(_points.getPoint("A"), _points.getPoint("E"));
+		Segment af = new Segment(_points.getPoint("A"), _points.getPoint("F"));
+		
+		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
+		Segment bd = new Segment(_points.getPoint("B"), _points.getPoint("D"));
+		Segment be = new Segment(_points.getPoint("B"), _points.getPoint("E"));
+		Segment bf = new Segment(_points.getPoint("B"), _points.getPoint("F"));
+		
+		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
+		Segment ce = new Segment(_points.getPoint("C"), _points.getPoint("E"));
+		Segment cf = new Segment(_points.getPoint("C"), _points.getPoint("F"));
+		
+		Segment de = new Segment(_points.getPoint("D"), _points.getPoint("E"));
+		Segment df = new Segment(_points.getPoint("D"), _points.getPoint("F"));
+		
+		Segment ef = new Segment(_points.getPoint("E"), _points.getPoint("F"));
+
+	
+
+		//
+		// Angles we expect to find
+		//
+		List<Angle> expectedAngles = new ArrayList<Angle>();
+		try {
+			//
+			//
+			// Angles broken down by equivalence class
+			//
+			//
+
+			// Straight angles
+			//
+			expectedAngles.add(new Angle(ab , bc));
+			expectedAngles.add(new Angle(ab , bd));
+			expectedAngles.add(new Angle(ab , be));
+			expectedAngles.add(new Angle(ab , bf));
+			
+			expectedAngles.add(new Angle(bc, cd));
+			expectedAngles.add(new Angle(bc, ce));
+			expectedAngles.add(new Angle(bc, cf));
+			
+			expectedAngles.add(new Angle(cd, de));
+			expectedAngles.add(new Angle(cd, df));
+			
+			expectedAngles.add(new Angle(de, ef));
+			expectedAngles.add(new Angle(de, bd));
+			expectedAngles.add(new Angle(de, ad));
+			
+			expectedAngles.add(new Angle(ef, ce));
+			expectedAngles.add(new Angle(ef, be));
+			expectedAngles.add(new Angle(ef, ae));
+			
+			expectedAngles.add(new Angle(ac, ce));
+			expectedAngles.add(new Angle(ac, cf));
+			
+			expectedAngles.add(new Angle(bd, df));
+			
+			
+			
+				
+		}
+		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
+		
+
+		assertEquals(expectedAngles.size(), computedAngles.size());
+		
+		//
+		// Equality
+		//
+		for (Angle expected : expectedAngles)
+		{
+			assertTrue(computedAngles.contains(expected));
+		}
+		} catch (FactException e) {
+
+		}
+	}
+	
+	
+	@Test
+	void test_crossed_lines()
+	{
+		init("jsonfiles/crossed_lines.json");
+
+		AngleIdentifier angleIdentifier = new AngleIdentifier(_segments);
+
+		AngleEquivalenceClasses computedAngles;
+		try {
+			computedAngles = angleIdentifier.getAngles();
+			
+		
+		
+
+		// The number of classes should equate to the number of 'minimal' angles
+		assertEquals("Number of Angle Equivalence classes", 6, computedAngles.numClasses());
+		
+		
+		//
+		// Implied minimal segments: 4 in this figure.
+		//
+		Point a_star = _points.getPoint(3,4);
+
+		Segment a_star_a = new Segment(a_star, _points.getPoint("A"));
+		Segment a_star_b = new Segment(a_star, _points.getPoint("B"));
+		Segment a_star_c = new Segment(a_star, _points.getPoint("C"));
+		Segment a_star_d = new Segment(a_star, _points.getPoint("D"));
+
+		
+		//
+		// Angles we expect to find
+		//
+		List<Angle> expectedAngles = new ArrayList<Angle>();
+		try {
+			//
+			//
+			// Angles broken down by equivalence class
+			//
+	
+			expectedAngles.add(new Angle(a_star_a , a_star_b ));
+			expectedAngles.add(new Angle(a_star_a , a_star_c));
+			expectedAngles.add(new Angle(a_star_a , a_star_d));
+			
+			
+			expectedAngles.add(new Angle(a_star_b, a_star_c));
+			expectedAngles.add(new Angle(a_star_b, a_star_d));
+			
+			expectedAngles.add(new Angle(a_star_c, a_star_d));
+	
+				
+		}
+		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
+		
+
+		assertEquals(expectedAngles.size(), computedAngles.size());
+		
+		//
+		// Equality
+		//
+		for (Angle expected : expectedAngles)
+		{
+			assertTrue(computedAngles.contains(expected));
+		}
+		} catch (FactException e) {
+
+		}
+	}
+	
+	
+	
+	
+	
+	@Test
+	void test_crossed_square()
+	{
+		init("jsonfiles/Crossed_Square.json");
+
+		AngleIdentifier angleIdentifier = new AngleIdentifier(_segments);
+
+		AngleEquivalenceClasses computedAngles;
+		try {
+			computedAngles = angleIdentifier.getAngles();
+			
+	
+		
+
+		// The number of classes should equate to the number of 'minimal' angles
+		assertEquals("Number of Angle Equivalence classes", 25, computedAngles.numClasses());
+		
+		//
+		// ALL original segments: 8 in this figure.
+		//
+		Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
+		Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
+		Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
+		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
+		Segment bd = new Segment(_points.getPoint("B"), _points.getPoint("D"));
+		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
+
+	
+		//
+		// Implied minimal segments: 4 in this figure.
+		//
+		Point a_star = _points.getPoint(3,3);
+
+		Segment a_star_a = new Segment(a_star, _points.getPoint("A"));
+		Segment a_star_b = new Segment(a_star, _points.getPoint("B"));
+		Segment a_star_c = new Segment(a_star, _points.getPoint("C"));
+		Segment a_star_d = new Segment(a_star, _points.getPoint("D"));
+
+		
+		
+		//
+		// Angles we expect to find
+		//
+		List<Angle> expectedAngles = new ArrayList<Angle>();
+		try {
+			//
+			//
+			// Angles broken down by equivalence class
+			//
+			expectedAngles.add(new Angle(ab , ac));
+			expectedAngles.add(new Angle(ab , bd));
+			expectedAngles.add(new Angle(ab , a_star_a));
+			expectedAngles.add(new Angle(ab , a_star_b));
+			expectedAngles.add(new Angle(ab , ad));
+			expectedAngles.add(new Angle(ab , bc));
+			
+			expectedAngles.add(new Angle(ac , cd));
+			expectedAngles.add(new Angle(ac , a_star_a));
+			expectedAngles.add(new Angle(ac , a_star_c));
+			expectedAngles.add(new Angle(ac , ad));
+			expectedAngles.add(new Angle(ac , bc));
+			
+			
+			expectedAngles.add(new Angle(bd , cd));
+			expectedAngles.add(new Angle(bd , a_star_b));
+			expectedAngles.add(new Angle(bd , a_star_d));
+			expectedAngles.add(new Angle(bd , ad));
+			expectedAngles.add(new Angle(bd , bc));
+			
+			expectedAngles.add(new Angle(cd , a_star_c));
+			expectedAngles.add(new Angle(cd , a_star_d));
+			expectedAngles.add(new Angle(cd , bc));
+			expectedAngles.add(new Angle(cd , ad));
+			
+	
+			expectedAngles.add(new Angle(a_star_a , a_star_b ));
+			expectedAngles.add(new Angle(a_star_a , a_star_c));
+			expectedAngles.add(new Angle(a_star_a , a_star_d));
+			
+			
+			expectedAngles.add(new Angle(a_star_b, a_star_c));
+			expectedAngles.add(new Angle(a_star_b, a_star_d));
+			
+			expectedAngles.add(new Angle(a_star_c, a_star_d));
+	
+				
+		}
+		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
+		
+
+		assertEquals(expectedAngles.size(), computedAngles.size());
+		
+		//
+		// Equality
+		//
+		for (Angle expected : expectedAngles)
+		{
+			assertTrue(computedAngles.contains(expected));
+		}
+		} catch (FactException e) {
+
+		}
+	}
+
+	
+	
+	@Test
+	void test_snake()
+	{
+		init("jsonfiles/snake.json");
+
+		AngleIdentifier angleIdentifier = new AngleIdentifier(_segments);
+
+		AngleEquivalenceClasses computedAngles;
+		try {
+			computedAngles = angleIdentifier.getAngles();
+		
+
+		// The number of classes should equate to the number of 'minimal' angles
+		assertEquals("Number of Angle Equivalence classes", 17, computedAngles.numClasses());
+		
+		//
+		// ALL original segments: 8 in this figure.
+		//
+		
+		Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
+		Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
+		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
+		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
+		Segment ce = new Segment(_points.getPoint("C"), _points.getPoint("E"));
+
+		Segment de = new Segment(_points.getPoint("D"), _points.getPoint("E"));
+		Segment eg = new Segment(_points.getPoint("E"), _points.getPoint("G"));
+		Segment fg = new Segment(_points.getPoint("F"), _points.getPoint("G"));
+		Segment ef = new Segment(_points.getPoint("E"), _points.getPoint("F"));
+		Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
+		
+		
+		
+
+		//
+		// Angles we expect to find
+		//
+		List<Angle> expectedAngles = new ArrayList<Angle>();
+		try {
+			//
+			//
+			// Angles broken down by equivalence class
+			//
+			//
+
+			// Straight angles
+			//
+			
+			
+			expectedAngles.add(new Angle(ab , bc));
+			expectedAngles.add(new Angle(ab , ac));
+			expectedAngles.add(new Angle(ab , ad));
+			expectedAngles.add(new Angle(bc , ac));
+			expectedAngles.add(new Angle(bc , cd));
+			expectedAngles.add(new Angle(bc , ce));
+			expectedAngles.add(new Angle(ac , cd));
+			expectedAngles.add(new Angle(ac , ce));
+			expectedAngles.add(new Angle(cd , ce));
+			expectedAngles.add(new Angle(cd , de));
+			expectedAngles.add(new Angle(ce , de));
+			expectedAngles.add(new Angle(ce , ef));
+			expectedAngles.add(new Angle(de, eg));
+			expectedAngles.add(new Angle(de , ef));
+			expectedAngles.add(new Angle(de , ad));
+			expectedAngles.add(new Angle(eg , fg));
+			expectedAngles.add(new Angle(eg , ef));
+			expectedAngles.add(new Angle(fg , ef));
+
+			
+			
+		}
+		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
+
+		assertEquals(expectedAngles.size(), computedAngles.size());
+		
+		//
+		// Equality
+		//
+		for (Angle expected : expectedAngles)
+		{
+			assertTrue(computedAngles.contains(expected));
+		}
+		} catch (FactException e) {
+
+		}
+	}
+	
+	
+	
 }

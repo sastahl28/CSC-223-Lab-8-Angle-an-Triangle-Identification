@@ -175,6 +175,8 @@ public class Angle implements Comparable<Angle>
 	{
 		Angle object = (Angle)obj;
 		
+		if (this.getVertex() != object.getVertex()) return false;
+		
 		if (this._ray1Endpoint.equals(object._ray1Endpoint) || this._ray1Endpoint.equals(object._ray2Endpoint)) {
 			if (this._ray2Endpoint.equals(object._ray1Endpoint) || this._ray2Endpoint.equals(object._ray2Endpoint)) {
 				return true;

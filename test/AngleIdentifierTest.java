@@ -49,28 +49,37 @@ class AngleIdentifierTest {
 	}
 	
 	@Test
-	void singleTriangleWithMultipleSegments() throws FactException {
+	void TriangleExtraPoint() throws FactException {
 		Point P1 = new Point(0,0);
 		Point P2 = new Point(1,1);
-		Point P3 = new Point(0,1);
+		Point P3 = new Point(1,0);
 		Point P4 = new Point(.5,0);
 		
-		Segment seg1 = new Segment(P1,P4);
-		Segment seg2 = new Segment(P4,P3);
-		Segment seg3 = new Segment(P3,P2);
-		Segment seg5 = new Segment(P1,P2);
+		/*
+		 * Segment seg1 = new Segment(P1,P2); Segment seg2 = new Segment(P2,P3); Segment
+		 * seg3 = new Segment(P1,P3); Segment seg4 = new Segment(P1,P4); Segment seg5 =
+		 * new Segment(P1,P3);
+		 */
+		
+		Segment seg1 = new Segment(P1, P4);
+		Segment seg2 = new Segment(P3, P4);
+		Segment seg3 = new Segment(P2, P3);
+		Segment seg4 = new Segment(P1, P2);
+		Segment seg5 = new Segment(P1, P3);
 		
 		List<Segment> tri = new ArrayList<Segment>();
 		
 		tri.add(seg3);
 		tri.add(seg2);
 		tri.add(seg1);
+		tri.add(seg4);
 		tri.add(seg5);
 		
 		Map <Segment, Segment> map = new HashMap<Segment, Segment>();
 		map.put(seg1, seg1);
 		map.put(seg2, seg2);
 		map.put(seg3, seg3);
+		map.put(seg4, seg4);
 		map.put(seg5, seg5);
 		
 		AngleIdentifier AI = new AngleIdentifier(map);
@@ -79,8 +88,10 @@ class AngleIdentifierTest {
 		
 		AEC = AI.getAngles();
 		
-		//assertEquals(4, AEC.numClasses());
 		assertEquals(6, AEC.size());
+		assertEquals(4, AEC.numClasses());
 	}
+	
+	
 
 }

@@ -42,11 +42,14 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		Point P3 = new Point(0,6);
 		
 		Angle angle1 = angleBuilder(P1,P2,P3);
+		Angle angle2 = angleBuilder(P3, P2, P1);
 		
 		assertTrue(AEC.add(angle1));
 		assertFalse(AEC.add(angle1));
 		
 		assertEquals(1, AEC.size());
+		assertTrue(AEC.contains(angle1));
+		assertTrue(AEC.contains(angle2));
 		
 		
 	}
@@ -74,13 +77,14 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		assertEquals(AEC.canonical(), angle1);
 		
 		assertEquals(AEC.size(), 2);
+		assertTrue(AEC.contains(angle1));
+		assertTrue(AEC.contains(angle2));
 		
 	}
 	
 	//add element smaller than the canonical
 	@Test
 	void SmallerAngle() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
 		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
@@ -100,13 +104,14 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		
 		assertTrue(AEC.add(angle1));
 		assertEquals(AEC.canonical(), angle1);
+		assertTrue(AEC.contains(angle1));
+		assertTrue(AEC.contains(angle2));
 		
 	}
 	
 	//add element smaller than the canonical
 		@Test
 		void BiggerSmallerAngle() throws FactException {
-			AngleStructureComparator ASC = new AngleStructureComparator();
 			
 			AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 			
@@ -126,6 +131,8 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 			
 			assertTrue(AEC.add(angle1));
 			assertEquals(2, AEC.size());
+			assertTrue(AEC.contains(angle1));
+			assertTrue(AEC.contains(angle2));
 			
 		}
 	
@@ -133,7 +140,6 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	//add element that DOES NOT BELONG
 	@Test
 	void FakeAngle() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
 		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
@@ -152,6 +158,8 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		
 		
 		assertFalse(AEC.add(angle2));
+		assertTrue(AEC.contains(angle1));
+		assertFalse(AEC.contains(angle2));
 		
 	}
 	
@@ -170,7 +178,6 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	//Belong tests
 	@Test
 	void DoesBelongBigger() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
 		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
@@ -193,7 +200,6 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	
 	@Test
 	void DoesBelongSmaller() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
 		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
@@ -216,7 +222,6 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	
 	@Test
 	void DoesNOTBelong() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
 		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
@@ -239,7 +244,6 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	
 	@Test
 	void NullBelong() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
 		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		
@@ -259,7 +263,6 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 	
 	@Test
 	void NullBelongTwo() throws FactException {
-		AngleStructureComparator ASC = new AngleStructureComparator();
 		
 		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
 		

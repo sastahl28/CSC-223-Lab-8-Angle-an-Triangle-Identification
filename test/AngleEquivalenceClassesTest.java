@@ -32,11 +32,17 @@ void AddWithNoCanonical() throws FactException {
 	
 	Angle angle1 = angleBuilder(P1,P2,P3);
 	
+	Point P4 = new Point(2,2);
+	
+	Angle angle2 = angleBuilder(P4,P1,P3);
+	
 	assertTrue(AEC.add(angle1));	
 	assertFalse(AEC.add(angle1));	
 	
 	assertEquals(AEC.size(), 1);
-
+	assertTrue(AEC.contains(angle1));
+	
+	assertFalse(AEC.contains(angle2));
 	
 }
 
@@ -63,6 +69,8 @@ void AddWithCanonical() throws FactException {
 	
 	assertEquals(AEC.size(), 2);
 	assertEquals(AEC.numClasses(), 1);
+	assertTrue(AEC.contains(angle1));
+	assertTrue(AEC.contains(angle2));
 	
 }
 
@@ -89,6 +97,8 @@ void TwoClasses() throws FactException {
 	
 	assertEquals(AEC.size(), 2);
 	assertEquals(AEC.numClasses(), 2);
+	assertTrue(AEC.contains(angle1));
+	assertTrue(AEC.contains(angle2));
 	
 }
 
@@ -114,6 +124,8 @@ void SmallerAngle() throws FactException {
 	assertTrue(AEC.add(angle1));
 	assertEquals(AEC.size(), 2);
 	assertEquals(AEC.numClasses(), 1);
+	assertTrue(AEC.contains(angle1));
+	assertTrue(AEC.contains(angle2));
 	
 }
 
@@ -140,7 +152,8 @@ void SmallerAngle() throws FactException {
 		assertTrue(AEC.add(angle1));
 		assertEquals(2, AEC.size());
 		assertEquals(1, AEC.numClasses());
-			
+		assertTrue(AEC.contains(angle1));
+		assertTrue(AEC.contains(angle2));
 		}
 
 }

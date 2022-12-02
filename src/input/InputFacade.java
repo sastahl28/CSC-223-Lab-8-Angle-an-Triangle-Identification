@@ -3,7 +3,6 @@ package input;
 
 
 import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +15,6 @@ import input.components.FigureNode;
 import input.components.point.PointNode;
 import input.components.segment.SegmentNode;
 import input.parser.JSONParser;
-import preprocessor.delegates.ImplicitPointPreprocessor;
 
 public class InputFacade
 {
@@ -74,18 +72,7 @@ public class InputFacade
 			segData.add(Seg);
 		}
 		
-		/*
-		//make a list of all the segments
-		List<Segment> segList = new ArrayList<Segment>(segData);
 		
-		
-		ImplicitPointPreprocessor ipp = new ImplicitPointPreprocessor();
-		List<Point> implicitPoints = new ArrayList<Point>(ipp.compute(pointData , segList));
-		
-		for(Point p : implicitPoints) {
-		pointData.put(p);
-		}
-		*/
 		return new AbstractMap.SimpleEntry<>(pointData, segData);
 	}
 }

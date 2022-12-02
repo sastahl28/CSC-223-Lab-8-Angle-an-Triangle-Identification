@@ -40,7 +40,7 @@ class TriangleIdentifierTest
 		_segments = _pp.getAllSegments();
 		
 	}
-	
+	//🫠 🫥
 	//      A                                 
 	//     / \                                
 	//    B___C                               
@@ -197,7 +197,7 @@ class TriangleIdentifierTest
 	@Test
 	void test_crossed_square()
 	{
-		init("jsonfiles/crossed_square.json");
+		init("jsonfiles/Crossed_Square.json");
 
 		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
 
@@ -267,7 +267,7 @@ class TriangleIdentifierTest
 	
 	
 	
-	/*
+	
 	@Test
 	void test_fully_connected_irregular_polygon()
 	{
@@ -279,14 +279,112 @@ class TriangleIdentifierTest
 
 		System.out.println(computedTriangles);
 
-		assertEquals(0, computedTriangles.size());
+		assertEquals(35, computedTriangles.size());
 
+
+		//
+		// ALL original segments: 8 in this figure.
+		//
+		Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
+		Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
+		Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
+		Segment ae = new Segment(_points.getPoint("A"), _points.getPoint("E"));
+		
+		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
+		Segment bd = new Segment(_points.getPoint("B"), _points.getPoint("D"));
+		Segment be = new Segment(_points.getPoint("B"), _points.getPoint("E"));
+		
+		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
+		Segment ce = new Segment(_points.getPoint("C"), _points.getPoint("E"));
+		
+		Segment de = new Segment(_points.getPoint("D"), _points.getPoint("E"));
+		
+
+		//
+		// Implied minimal segments: 4 in this figure.
+		//
+		Point f_star = _points.getPoint(2.49122807018, 3.43859649123);
+		Point g_star = _points.getPoint(3.527 , 3.309);
+		Point h_star = _points.getPoint(2.174, 1.217);
+		Point i_star = _points.getPoint(2.941, 0.707);
+		Point j_star = _points.getPoint(3.806 , 1.355);
+
+		Segment f_star_a = new Segment(f_star, _points.getPoint("A"));
+		Segment f_star_c = new Segment(f_star, _points.getPoint("C"));
+		Segment f_star_d = new Segment(f_star, _points.getPoint("D"));
+		Segment f_star_e = new Segment(f_star, _points.getPoint("E"));
+	
+	
+		Segment g_star_b = new Segment(g_star, _points.getPoint("B"));
+		Segment g_star_c = new Segment(g_star, _points.getPoint("C"));
+		Segment g_star_d = new Segment(g_star, _points.getPoint("D"));
+		Segment g_star_e = new Segment(g_star, _points.getPoint("E"));
+		
+	
+		Segment h_star_a = new Segment(h_star, _points.getPoint("A"));
+		Segment h_star_b = new Segment(h_star, _points.getPoint("B"));
+		Segment h_star_d = new Segment(h_star, _points.getPoint("D"));
+		Segment h_star_e = new Segment(h_star, _points.getPoint("E"));
+		
+		
+		Segment i_star_a = new Segment(i_star, _points.getPoint("A"));
+		Segment i_star_b = new Segment(i_star, _points.getPoint("B"));
+		Segment i_star_c = new Segment(i_star, _points.getPoint("C"));
+		Segment i_star_e = new Segment(i_star, _points.getPoint("E"));
+		
+		Segment j_star_a = new Segment(j_star, _points.getPoint("A"));
+		Segment j_star_b = new Segment(j_star, _points.getPoint("B"));
+		Segment j_star_c = new Segment(j_star, _points.getPoint("C"));
+		Segment j_star_d = new Segment(j_star, _points.getPoint("D"));
+		
+		
+
+		//
+		// Non-minimal, computed segments: 2 in this figure.
+		//
+		//Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
+		//Segment ae = new Segment(_points.getPoint("A"), _points.getPoint("E"));
 
 		//
 		// Triangles we expect to find
 		//
 		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
-		
+		try {
+			//
+			// Triangles we expect to find from maximum segments
+			//
+			expectedTriangles.add(new Triangle(Arrays.asList(ab, bc, ac)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ab, bd, ad)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ab, be, ae)));
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(ac, cd, ad)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ac, ce, ae)));
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(ad, de, ae)));
+			
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(bc, cd, bd)));
+			expectedTriangles.add(new Triangle(Arrays.asList(bc, ce, be)));
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(bd, de, be)));
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(ce, cd, de)));
+			
+			
+			
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(ac , f_star_c, f_star_a)));
+			
+			
+			
+			
+
+			
+
+			
+		}
+		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
+
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
 		
 		for (Triangle computedTriangle : computedTriangles)
@@ -294,7 +392,7 @@ class TriangleIdentifierTest
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	*/
+	
 	
 	
 	@Test
@@ -552,7 +650,6 @@ class TriangleIdentifierTest
 
 		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
 
-		System.out.println(computedTriangles);
 
 		assertEquals(1, computedTriangles.size());
 		
@@ -566,7 +663,7 @@ class TriangleIdentifierTest
 		//
 		// Non-minimal, computed segments: 2 in this figure.
 		//
-		Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("D"));
+		Segment ab = new Segment(_points.getPoint("A"), _points.getPoint("B"));
 
 		//
 		// Triangles we expect to find

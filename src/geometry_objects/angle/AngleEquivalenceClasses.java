@@ -73,21 +73,6 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 		}
 		
 		/**
-		 * Returns the number of equivalence classes contained in the list
-		 * @return and integer 
-		 */
-		@Override
-		public int size() {
-			//calculate # of items in all classes
-			int size = 0;
-			for (LinkedEquivalenceClass<Angle> c:_classes) {
-				size = size + c.size();
-			}
-			return size;
-		}
-
-
-		/**
 		 * Returns the index a particular class is located at; Returns -1 if
 		 * the input is null or the class is not contained in the list
 		 * @param element

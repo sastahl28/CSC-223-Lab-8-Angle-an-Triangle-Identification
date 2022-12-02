@@ -8,6 +8,7 @@ import java.util.Set;
 
 import exceptions.FactException;
 import geometry_objects.Segment;
+import geometry_objects.Triangle;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import preprocessor.delegates.ImplicitPointPreprocessor;
@@ -37,39 +38,6 @@ public class AngleIdentifier
 
 		return _angles;
 	}
-
-	
-	/*
-	 * private Set<Segment> getAllSegments() { Set<Segment> segmentKeys =
-	 * _segments.keySet(); List<Segment> segmentList = new ArrayList<Segment>();
-	 * 
-	 * for(Segment s: segmentKeys) { segmentList.add(s); }
-	 * 
-	 * PointDatabase PDB = new PointDatabase();
-	 * 
-	 * for(Segment s: segmentKeys) { PDB.put(s.getPoint1()); PDB.put(s.getPoint2());
-	 * }
-	 * 
-	 * Set<Point> setPoint = ImplicitPointPreprocessor.compute(PDB, segmentList);
-	 * 
-	 * Preprocessor prepro = new Preprocessor(PDB, segmentKeys);
-	 * 
-	 * Set<Segment> baseSegs = prepro.computeImplicitBaseSegments(setPoint);
-	 * 
-	 * Set<Segment> minimalSegs = prepro.identifyAllMinimalSegments(setPoint,
-	 * segmentKeys, baseSegs);
-	 * 
-	 * Set<Segment> NonMinimalSegs =
-	 * prepro.constructAllNonMinimalSegments(minimalSegs);
-	 * 
-	 * Set<Segment> AllSegs = minimalSegs;
-	 * 
-	 * AllSegs.addAll(NonMinimalSegs);
-	 * 
-	 * return AllSegs;
-	 * 
-	 * }
-	 */
 	
 	
 	private void computeAngles() throws FactException
@@ -84,64 +52,26 @@ public class AngleIdentifier
 
 				Segment seg2 = segmentList.get(j);
 				
-				Point vertex = seg1.sharedVertex(seg2);
-				
-				if (vertex != null) {
-					
-					if (!(seg1.HasSubSegment(seg2))){
-						
-						if (!(seg2.HasSubSegment(seg1))) {
-						
-						Angle angle = new Angle(seg1, seg2);
-						
-						_angles.add(angle);
-					}
+				try
+				{Angle angle = new Angle(seg1, seg2);
+
+				//add the triangle to the 
+				_angles.add(angle);
 				}
+
+				catch(FactException triangle) {}
+				
 			}
 		
 		}
 	}
 		
 
-		/*
-		 * for (int i = 0; i < _segments.size()-1; i++) { for (int j = i+1; j <
-		 * _segments.size(); j++) {
-		 * 
-		 * Segment seg1 = _segments.get(i); Segment seg2 = _segments.get(j);
-		 * 
-		 * Point vertex = seg1.sharedVertex(seg2);
-		 * 
-		 * if (vertex != null) { if (!(seg1.HasSubSegment(seg2))){
-		 * 
-		 * Angle angle = new Angle(seg1, seg2); _angles.add(angle);
-		 */
-		
-		//begin with a segment from given segments	
-		
-		/*
-		 * for (int i = 0; i < allSegs.size()-1; i++) { for (int j = i+1; j <
-		 * allSegs.size(); j++) {
-		 * 
-		 * Segment seg1 = segmentList.get(i); Segment seg2 = segmentList.get(j);
-		 * 
-		 * Point vertex = seg1.sharedVertex(seg2);
-		 * 
-		 * if (vertex != null) { if (!(seg1.HasSubSegment(seg2))){
-		 * if(!(seg2.HasSubSegment(seg1))) {
-		 * 
-		 * Angle angle = new Angle(seg1, seg2); _angles.add(angle);
-		 * 
-		 * }
-		 * 
-		 * } }
-		 * 
-		 * } }
-		 */
+
 		
 		
 		
 		
 		
-		
-	}
 }
+

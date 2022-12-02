@@ -54,10 +54,6 @@ public class PointDatabase
 		_factory.put(name , x ,y);
 		
 	}
-
-	public void put(Point p) {
-		put(p.getName(),p.getX(),p.getY());
-	}
 	
 	
 	/**

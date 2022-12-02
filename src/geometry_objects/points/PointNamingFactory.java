@@ -188,7 +188,12 @@ public class PointNamingFactory
 		// TODO
 		if (!contains(x, y)) { return createNewPoint(name, x, y); }
 		
-		return get(x, y);
+		Point p = get(x,y);
+		if(p.isUnnamed()) {
+			p._name = name;
+			
+		}
+		return p;
 	}  
 
 	/**

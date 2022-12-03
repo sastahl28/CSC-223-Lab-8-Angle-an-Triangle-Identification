@@ -277,10 +277,8 @@ class TriangleIdentifierTest
 
 		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
 
-		System.out.println(computedTriangles);
 
 		assertEquals(35, computedTriangles.size());
-
 
 		//
 		// ALL original segments: 8 in this figure.
@@ -309,6 +307,8 @@ class TriangleIdentifierTest
 		Point i_star = _points.getPoint(2.941, 0.707);
 		Point j_star = _points.getPoint(3.806 , 1.355);
 
+		
+		
 		Segment f_star_a = new Segment(f_star, _points.getPoint("A"));
 		Segment f_star_c = new Segment(f_star, _points.getPoint("C"));
 		Segment f_star_d = new Segment(f_star, _points.getPoint("D"));
@@ -337,7 +337,8 @@ class TriangleIdentifierTest
 		Segment j_star_c = new Segment(j_star, _points.getPoint("C"));
 		Segment j_star_d = new Segment(j_star, _points.getPoint("D"));
 		
-		
+		Segment f_star_g_star = new Segment(f_star, g_star);
+		Segment f_star_h_star = new Segment(f_star, h_star);
 
 		//
 		// Non-minimal, computed segments: 2 in this figure.
@@ -373,9 +374,33 @@ class TriangleIdentifierTest
 			
 			
 			
+			expectedTriangles.add(new Triangle(Arrays.asList(ab , h_star_b, h_star_a)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ab , i_star_b, i_star_a)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ab , j_star_b, j_star_a)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ac , f_star_c, f_star_a)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ad , j_star_d, j_star_a)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ae , f_star_e, f_star_a)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ae , i_star_e, i_star_a)));
 			
 			
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(bc , g_star_c, g_star_b)));
+			expectedTriangles.add(new Triangle(Arrays.asList(bc , j_star_c, j_star_b)));
+			expectedTriangles.add(new Triangle(Arrays.asList(bc , i_star_c, i_star_b)));
+			expectedTriangles.add(new Triangle(Arrays.asList(bd , h_star_d, h_star_b)));
+			expectedTriangles.add(new Triangle(Arrays.asList(be , g_star_e, g_star_b)));
+			
+			
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(cd , f_star_c, f_star_d)));
+			expectedTriangles.add(new Triangle(Arrays.asList(cd , g_star_c, g_star_d)));
+			expectedTriangles.add(new Triangle(Arrays.asList(cd , j_star_c, j_star_d)));
+			expectedTriangles.add(new Triangle(Arrays.asList(ce , i_star_c, i_star_e)));
+			
+			
+			expectedTriangles.add(new Triangle(Arrays.asList(de , f_star_e, f_star_d)));
+			expectedTriangles.add(new Triangle(Arrays.asList(de , g_star_e, j_star_d)));
+			expectedTriangles.add(new Triangle(Arrays.asList(de , h_star_d, i_star_e)));
 			
 			
 

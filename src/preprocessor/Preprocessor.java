@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -60,6 +61,7 @@ public class Preprocessor
 	 */
 	public void analyze()
 	{
+		List<Segment> segList = new ArrayList(_givenSegments.stream().toList());
 		//
 		// Implicit Points
 		//

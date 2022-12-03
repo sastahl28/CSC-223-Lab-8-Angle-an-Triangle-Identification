@@ -113,6 +113,8 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 			_canonical = element;
 			return true;
 		}
+		
+		
 		//resetting canonical//
 		//check if canonical and element are identical or if element is null
 		if (_canonical.equals(element) || element == null) return false;
@@ -128,18 +130,6 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		return true;
 	}
 	
-	
-	/**
-	 * Returns a string representation of the Linked Equivalence Class
-	 */
-	@Override
-	public String toString() {
-		//Create a string that represents list/canonical EX: {2 | 4, 6, 8, 12}
-		StringBuilder s = new StringBuilder();
-		s.append("{" + _canonical + " | ");
-		s.append(_rest.toString() + "}");
-		return s.toString();
-	}
 	
 	
 }

@@ -175,15 +175,20 @@ public class Angle implements Comparable<Angle>
 	{
 		Angle object = (Angle)obj;
 		
-		if (this.getVertex() != object.getVertex()) return false;
+		Point vertex = this.getVertex();
 		
-		if (this._ray1Endpoint.equals(object._ray1Endpoint) || this._ray1Endpoint.equals(object._ray2Endpoint)) {
-			if (this._ray2Endpoint.equals(object._ray1Endpoint) || this._ray2Endpoint.equals(object._ray2Endpoint)) {
-				return true;
-			}
-		}
+		if (!(vertex.equals(object.getVertex()))) return false;
 		
-		return false;
+		Point T1 = this._ray1.other(vertex);
+		Point T2 = this._ray2.other(vertex);
+		
+		Point o1 = object._ray1.other(vertex);
+		Point o2 = object._ray2.other(vertex);
+		
+		if (!((T1).equals(o1) || (T1.equals(o2)))) return false;
+		if (!((T2).equals(o1) || (T2.equals(o2)))) return false;
+		return true;
+		
 		
 	}
 }

@@ -191,6 +191,10 @@ class AngleIdentifierTest
 		
 		assertEquals(expectedAngles.size(), computedAngles.size());
 		
+		//missing: mCAD = 53.130
+		// (4,4), (3,6), (0,0)
+		//missing: mCDA = 18.435
+		// (4,4), (0,0), (3,6)
 		//
 		// Equality
 		//
@@ -200,6 +204,8 @@ class AngleIdentifierTest
 		}
 		} catch (FactException e) {
 
+			
+			
 		}
 	}
 	
@@ -368,7 +374,6 @@ class AngleIdentifierTest
 		//
 		for (Angle expected : expectedAngles)
 		{
-			System.out.println(expected.toString());
 			assertTrue(computedAngles.contains(expected));
 			
 		}

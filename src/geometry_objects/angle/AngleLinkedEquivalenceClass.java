@@ -54,13 +54,13 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 			return true;
 		}
 		
-		if (_comparator.compare(element, _canonical) == 1 || _comparator.compare(element, _canonical) == 0) {
-			_rest.addToBack(element);
-		}
-		
-		if (_comparator.compare(element, _canonical) == -1) {
-			this.demoteAndSetCanonical(element);
-		}
+			
+		  if (_comparator.compare(element, _canonical) == 1 ||
+		  _comparator.compare(element, _canonical) == 0) { _rest.addToBack(element); }
+		  
+		  if (_comparator.compare(element, _canonical) == -1) {
+		  this.demoteAndSetCanonical(element); }
+		 
 		return true;
 	
 	}
@@ -124,7 +124,7 @@ public class AngleLinkedEquivalenceClass extends LinkedEquivalenceClass<Angle>
 		if (contains(element)) _rest.remove(element);
 		
 		//add canonical to front of list
-		_rest.addToFront(_canonical);
+		_rest.addToBack(_canonical);
 		//set input value to canonical
 		_canonical = element;
 		return true;

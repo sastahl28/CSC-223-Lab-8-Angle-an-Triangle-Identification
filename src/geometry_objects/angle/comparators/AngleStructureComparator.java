@@ -83,14 +83,5 @@ public class AngleStructureComparator implements Comparator<Angle>
         }
         return 0;
         
-        
-		/*
-		 * if (left.overlays(right)) {return 1;}
-		 * 
-		 * if (right.overlays(left)) {return -1;}
-		 * 
-		 * return 0;
-		 * 
-		 */
 	}
 }

@@ -187,7 +187,7 @@ class AngleIdentifierTest
 			expectedAngles.add(new Angle(bc, ce));			
 		}
 		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
-
+		
 		assertEquals(expectedAngles.size(), computedAngles.size());
 		
 		//
@@ -282,8 +282,10 @@ class AngleIdentifierTest
 			expectedAngles.add(new Angle(ef, ae));
 			
 			expectedAngles.add(new Angle(ac, ce));
+			expectedAngles.add(new Angle(ac, cd));
 			expectedAngles.add(new Angle(ac, cf));
 			
+			expectedAngles.add(new Angle(bd, df));
 			expectedAngles.add(new Angle(bd, df));
 			
 			
@@ -292,7 +294,6 @@ class AngleIdentifierTest
 		}
 		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
 		
-
 		assertEquals(expectedAngles.size(), computedAngles.size());
 		
 		//
@@ -471,7 +472,7 @@ class AngleIdentifierTest
 		}
 		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
 		
-
+		
 		assertEquals(expectedAngles.size(), computedAngles.size());
 		
 		//
@@ -555,12 +556,13 @@ class AngleIdentifierTest
 			expectedAngles.add(new Angle(eg , fg));
 			expectedAngles.add(new Angle(eg , ef));
 			expectedAngles.add(new Angle(fg , ef));
+			expectedAngles.add(new Angle(ce , eg));
 
 			
 			
 		}
 		catch (FactException te) { System.err.println("Invalid Angles in Angle test."); }
-
+		
 		assertEquals(expectedAngles.size(), computedAngles.size());
 		
 		//

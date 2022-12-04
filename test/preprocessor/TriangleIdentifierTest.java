@@ -16,7 +16,6 @@ import geometry_objects.Triangle;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import input.components.FigureNode;
-import preprocessor.delegates.ImplicitPointPreprocessor;
 import input.InputFacade;
 
 class TriangleIdentifierTest

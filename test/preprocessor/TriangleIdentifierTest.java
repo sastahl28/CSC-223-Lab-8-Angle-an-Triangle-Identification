@@ -23,7 +23,7 @@ class TriangleIdentifierTest
 	protected PointDatabase _points;
 	protected Preprocessor _pp;
 	protected Map<Segment, Segment> _segments;
-	
+
 	protected void init(String filename)
 	{
 		FigureNode fig = InputFacade.extractFigure(filename);
@@ -37,9 +37,151 @@ class TriangleIdentifierTest
 		_pp.analyze();
 
 		_segments = _pp.getAllSegments();
-		
+
 	}
-	//🫠 🫥
+
+
+	/**
+	 * 
+	 * N    N     oooo       TTTTTTT	RRRR		I
+	 * N N  N    o    o			T		R	R		I
+	 * N  N N    o    o			T		RRR			I
+	 * N    N     oooo		    T		R	 R		I
+	 * 
+	 * 
+	 */
+
+
+	@Test
+	void test_collinear_line_segments()
+	{
+		init("jsonfiles/collinear_line_segments.json");
+
+		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
+
+		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
+
+		System.out.println(computedTriangles);
+
+		assertEquals(0, computedTriangles.size());
+
+
+		//
+		// Triangles we expect to find
+		//
+		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
+
+		assertEquals(expectedTriangles.size(), computedTriangles.size());
+
+		for (Triangle computedTriangle : computedTriangles)
+		{
+			assertTrue(expectedTriangles.contains(computedTriangle));
+		}
+	}
+
+
+
+	@Test
+	void test_crossed_lines()
+	{
+		init("jsonfiles/crossed_lines.json");
+
+		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
+
+		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
+
+		System.out.println(computedTriangles);
+
+		assertEquals(0, computedTriangles.size());
+
+
+		//
+		// Triangles we expect to find
+		//
+		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
+
+		assertEquals(expectedTriangles.size(), computedTriangles.size());
+
+		for (Triangle computedTriangle : computedTriangles)
+		{
+			assertTrue(expectedTriangles.contains(computedTriangle));
+		}
+	}
+
+
+
+	@Test
+	void test_lineseg()
+	{
+		init("jsonfiles/lineseg.json") ;
+
+		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
+
+		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
+
+		System.out.println(computedTriangles);
+
+		assertEquals(0, computedTriangles.size());
+
+
+		//
+		// Triangles we expect to find
+		//
+		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
+
+		assertEquals(expectedTriangles.size(), computedTriangles.size());
+
+		for (Triangle computedTriangle : computedTriangles)
+		{
+			assertTrue(expectedTriangles.contains(computedTriangle));
+		}
+	}
+
+
+	@Test
+	void test_overlapping_rectangles()
+	{
+		init("jsonfiles/overlapping_rectangles.json");
+
+		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
+
+		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
+
+		System.out.println(computedTriangles);
+
+		assertEquals(0, computedTriangles.size());
+
+		//
+		// Triangles we expect to find
+		//
+		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
+
+		assertEquals(expectedTriangles.size(), computedTriangles.size());
+
+		for (Triangle computedTriangle : computedTriangles)
+		{
+			assertTrue(expectedTriangles.contains(computedTriangle));
+		}
+	}
+
+
+
+
+	/**
+	 * Y   Y   EEEEE    SSSS
+	 *  Y Y    E       S
+	 *   Y     EEEEE    SSSS
+	 *   Y     E            S
+	 *   Y     EEEEE    SSSS
+	 * 
+	 */
+
+
+
+
+
+	//Provided Test
+	//
 	//      A                                 
 	//     / \                                
 	//    B___C                               
@@ -117,82 +259,25 @@ class TriangleIdentifierTest
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	@Test
-	void test_collinear_line_segments()
-	{
-		init("jsonfiles/collinear_line_segments.json");
-
-		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
-
-		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
-
-		System.out.println(computedTriangles);
-
-		assertEquals(0, computedTriangles.size());
 
 
-		//
-		// Triangles we expect to find
-		//
-		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
-		
-		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
-		for (Triangle computedTriangle : computedTriangles)
-		{
-			assertTrue(expectedTriangles.contains(computedTriangle));
-		}
-	}
-	
-	
-	
-	
-
-	@Test
-	void test_crossed_lines()
-	{
-		init("jsonfiles/crossed_lines.json");
-
-		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
-
-		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
-
-		System.out.println(computedTriangles);
-
-		assertEquals(0, computedTriangles.size());
 
 
-		//
-		// Triangles we expect to find
-		//
-		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
-		
-		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
-		for (Triangle computedTriangle : computedTriangles)
-		{
-			assertTrue(expectedTriangles.contains(computedTriangle));
-		}
-	}
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
 	@Test
 	void test_crossed_square()
 	{
@@ -215,7 +300,7 @@ class TriangleIdentifierTest
 
 		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
 		Segment bd = new Segment(_points.getPoint("B"), _points.getPoint("D"));
-		
+
 		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
 
 
@@ -228,7 +313,7 @@ class TriangleIdentifierTest
 		Segment a_star_b = new Segment(a_star, _points.getPoint("B"));
 		Segment a_star_c = new Segment(a_star, _points.getPoint("C"));
 		Segment a_star_d = new Segment(a_star, _points.getPoint("D"));
-		
+
 
 
 		//
@@ -237,36 +322,46 @@ class TriangleIdentifierTest
 		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
 		try {
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, bc, ac)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, ad, bd)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, a_star_a, a_star_b)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ac, ad, cd)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ac, a_star_a, a_star_c)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(bc, bd, cd)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(bd, a_star_b, a_star_d)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(cd, a_star_c, a_star_d)));
-			
-		
+
+
 		}
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	
-	
-	
-	
+
+
+	//
+	//
+	//		               D(3, 7)
+	//
+	//
+	//   E(-2,4)       F*      G*
+	//		         H*          J*       C(6, 3)
+	//                      I*
+	//		       A(2,0)        B(4, 0)
+	//
+	//		    An irregular pentagon with 35 triangles
+
 	@Test
 	void test_fully_connected_irregular_polygon()
 	{
@@ -286,19 +381,19 @@ class TriangleIdentifierTest
 		Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
 		Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
 		Segment ae = new Segment(_points.getPoint("A"), _points.getPoint("E"));
-		
+
 		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
 		Segment bd = new Segment(_points.getPoint("B"), _points.getPoint("D"));
 		Segment be = new Segment(_points.getPoint("B"), _points.getPoint("E"));
-		
+
 		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
 		Segment ce = new Segment(_points.getPoint("C"), _points.getPoint("E"));
-		
+
 		Segment de = new Segment(_points.getPoint("D"), _points.getPoint("E"));
-		
+
 
 		//
-		// Implied minimal segments: 4 in this figure.
+		// Implied points: 4 in this figure.
 		//
 		Point f_star = _points.getPoint(2.49122807018, 3.43859649123);
 		Point g_star = _points.getPoint(3.52727272727 ,3.30909090909);
@@ -306,47 +401,48 @@ class TriangleIdentifierTest
 		Point i_star = _points.getPoint(2.941176471, 0.7058823529);
 		Point j_star = _points.getPoint(3.806451613 , 1.3548387);
 
-		
-		
+
+		//
+		//Create the minimal segments with implied points
+		//
 		Segment f_star_a = new Segment(f_star, _points.getPoint("A"));
 		Segment f_star_c = new Segment(f_star, _points.getPoint("C"));
 		Segment f_star_d = new Segment(f_star, _points.getPoint("D"));
 		Segment f_star_e = new Segment(f_star, _points.getPoint("E"));
-	
-	
+
+
 		Segment g_star_b = new Segment(g_star, _points.getPoint("B"));
 		Segment g_star_c = new Segment(g_star, _points.getPoint("C"));
 		Segment g_star_d = new Segment(g_star, _points.getPoint("D"));
 		Segment g_star_e = new Segment(g_star, _points.getPoint("E"));
-		
-	
+
+
 		Segment h_star_a = new Segment(h_star, _points.getPoint("A"));
 		Segment h_star_b = new Segment(h_star, _points.getPoint("B"));
 		Segment h_star_d = new Segment(h_star, _points.getPoint("D"));
 		Segment h_star_e = new Segment(h_star, _points.getPoint("E"));
-		
-		
+
+
 		Segment i_star_a = new Segment(i_star, _points.getPoint("A"));
 		Segment i_star_b = new Segment(i_star, _points.getPoint("B"));
 		Segment i_star_c = new Segment(i_star, _points.getPoint("C"));
 		Segment i_star_e = new Segment(i_star, _points.getPoint("E"));
-		
+
 		Segment j_star_a = new Segment(j_star, _points.getPoint("A"));
 		Segment j_star_b = new Segment(j_star, _points.getPoint("B"));
 		Segment j_star_c = new Segment(j_star, _points.getPoint("C"));
 		Segment j_star_d = new Segment(j_star, _points.getPoint("D"));
-		
+
+
+		//
+		//Minimal segments between implied points
+		//
 		Segment f_star_g_star = new Segment(f_star, g_star);
 		Segment f_star_h_star = new Segment(f_star, h_star);
 		Segment h_star_i_star = new Segment(h_star, i_star);
 		Segment i_star_j_star = new Segment(i_star, j_star);
 		Segment g_star_j_star = new Segment(g_star, j_star);
 
-
-		//
-		// Non-minimal, computed segments: 2 in this figure.
-		//
-		
 
 		//
 		// Triangles we expect to find
@@ -359,23 +455,25 @@ class TriangleIdentifierTest
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, bc, ac)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, bd, ad)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, be, ae)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ac, cd, ad)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ac, ce, ae)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ad, de, ae)));
-			
-			
+
+
 			expectedTriangles.add(new Triangle(Arrays.asList(bc, cd, bd)));
 			expectedTriangles.add(new Triangle(Arrays.asList(bc, ce, be)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(bd, de, be)));
-			
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ce, cd, de)));
-			
-			
-			
-			
+
+
+			//
+			//Triangles from the given and implied points
+			//
+
 			expectedTriangles.add(new Triangle(Arrays.asList(ab , h_star_b, h_star_a)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ab , i_star_b, i_star_a)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ab , j_star_b, j_star_a)));
@@ -384,108 +482,53 @@ class TriangleIdentifierTest
 			expectedTriangles.add(new Triangle(Arrays.asList(ae , f_star_e, f_star_a)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ae , i_star_e, i_star_a)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ae , h_star_e, h_star_a)));
-			
-			
+
+
 			expectedTriangles.add(new Triangle(Arrays.asList(bc , g_star_c, g_star_b)));
 			expectedTriangles.add(new Triangle(Arrays.asList(bc , j_star_c, j_star_b)));
 			expectedTriangles.add(new Triangle(Arrays.asList(bc , i_star_c, i_star_b)));
 			expectedTriangles.add(new Triangle(Arrays.asList(bd , h_star_d, h_star_b)));
 			expectedTriangles.add(new Triangle(Arrays.asList(be , g_star_e, g_star_b)));
-			
-			
-			
+
+
 			expectedTriangles.add(new Triangle(Arrays.asList(cd , f_star_c, f_star_d)));
 			expectedTriangles.add(new Triangle(Arrays.asList(cd , g_star_c, g_star_d)));
 			expectedTriangles.add(new Triangle(Arrays.asList(cd , j_star_c, j_star_d)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ce , i_star_c, i_star_e)));
-			
-			
+
+
 			expectedTriangles.add(new Triangle(Arrays.asList(de , f_star_d, f_star_e)));
 			expectedTriangles.add(new Triangle(Arrays.asList(de , g_star_d, g_star_e)));
 			expectedTriangles.add(new Triangle(Arrays.asList(de , h_star_d, h_star_e)));
-			
-			
+
+
+			//
+			// Triangles from one given and two implied points
+			//
+
 			expectedTriangles.add(new Triangle(Arrays.asList(h_star_a , i_star_a, h_star_i_star)));
 			expectedTriangles.add(new Triangle(Arrays.asList(i_star_b , j_star_b, i_star_j_star)));
 			expectedTriangles.add(new Triangle(Arrays.asList(g_star_c , j_star_c, g_star_j_star)));
 			expectedTriangles.add(new Triangle(Arrays.asList(f_star_d , g_star_d, f_star_g_star)));
 			expectedTriangles.add(new Triangle(Arrays.asList(f_star_e , h_star_e, f_star_h_star)));
-			
 
-			
+
+
 		}
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	
-	
-	
-	@Test
-	void test_lineseg()
-	{
-		init("jsonfiles/lineseg.json") ;
-
-		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
-
-		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
-
-		System.out.println(computedTriangles);
-
-		assertEquals(0, computedTriangles.size());
 
 
-		//
-		// Triangles we expect to find
-		//
-		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
-		
-		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
-		for (Triangle computedTriangle : computedTriangles)
-		{
-			assertTrue(expectedTriangles.contains(computedTriangle));
-		}
-	}
-	
-	
-	
-	
-	@Test
-	void test_overlapping_rectangles()
-	{
-		init("jsonfiles/overlapping_rectangles.json");
-
-		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
-
-		Set<Triangle> computedTriangles = triIdentifier.getTriangles();
-
-		System.out.println(computedTriangles);
-
-		assertEquals(0, computedTriangles.size());
 
 
-		//
-		// Triangles we expect to find
-		//
-		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
-		
-		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
-		for (Triangle computedTriangle : computedTriangles)
-		{
-			assertTrue(expectedTriangles.contains(computedTriangle));
-		}
-	}
-	
-	
-	
-	
+
 	@Test
 	void test_single_triangle()
 	{
@@ -498,8 +541,8 @@ class TriangleIdentifierTest
 		System.out.println(computedTriangles);
 
 		assertEquals(1, computedTriangles.size());
-		
-		
+
+
 		//
 		// ALL original segments: 8 in this figure.
 		//
@@ -514,22 +557,27 @@ class TriangleIdentifierTest
 		try {
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, bc, ac)));
 
-			
+
 		}
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	
-	
-	
-	
-	
+
+
+	//  B        E____F
+	//  |\      /|\   |
+	//  | \    / | \  |
+	//  |  \  /  |  \ |
+	//  |___\/___|   \|
+	//  A    C   D    G
+	// "Description" : "Three triangles glued by vertex in a row",
+
 	@Test
 	void test_snake()
 	{
@@ -567,21 +615,21 @@ class TriangleIdentifierTest
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, bc, ac)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ce, cd, de)));
 			expectedTriangles.add(new Triangle(Arrays.asList(eg, ef, fg)));
-			
+
 		}
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	@Test
 	void test_Tri_quad_with_implied()
 	{
@@ -596,7 +644,7 @@ class TriangleIdentifierTest
 		assertEquals(1, computedTriangles.size());
 
 		//
-		// ALL original segments: 8 in this figure.
+		// ALL original segments: 1 in this figure.
 		//
 
 		Segment cd = new Segment(_points.getPoint("C"), _points.getPoint("D"));
@@ -614,24 +662,24 @@ class TriangleIdentifierTest
 		//
 		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
 		try {
-	
+
 			expectedTriangles.add(new Triangle(Arrays.asList(cd, a_star_c, a_star_d)));
 
 		}
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	@Test
 	void test_Tri_quad()
 	{
@@ -646,7 +694,7 @@ class TriangleIdentifierTest
 		assertEquals(1, computedTriangles.size());
 
 		//
-		// ALL original segments: 8 in this figure.
+		// ALL original segments: 3 in this figure.
 		//
 		Segment ic = new Segment(_points.getPoint("I"), _points.getPoint("C"));
 		Segment id = new Segment(_points.getPoint("I"), _points.getPoint("D"));
@@ -663,15 +711,15 @@ class TriangleIdentifierTest
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));
 		}
 	}
-	
-	
-	
+
+
+
 	@Test
 	void test_triangle_four_points()
 	{
@@ -683,11 +731,11 @@ class TriangleIdentifierTest
 
 
 		assertEquals(1, computedTriangles.size());
-		
+
 		//
 		// ALL original segments: 8 in this figure.
 		//
-		
+
 		Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
 		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
 
@@ -702,12 +750,12 @@ class TriangleIdentifierTest
 		List<Triangle> expectedTriangles = new ArrayList<Triangle>();
 		try {
 			expectedTriangles.add(new Triangle(Arrays.asList(ab, bc, ac)));
-			
+
 		}
 		catch (FactException te) { System.err.println("Invalid triangles in triangle test."); }
 
 		assertEquals(expectedTriangles.size(), computedTriangles.size());
-		
+
 		for (Triangle computedTriangle : computedTriangles)
 		{
 			assertTrue(expectedTriangles.contains(computedTriangle));

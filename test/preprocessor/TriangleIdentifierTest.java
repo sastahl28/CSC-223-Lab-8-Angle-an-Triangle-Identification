@@ -16,7 +16,6 @@ import geometry_objects.Triangle;
 import geometry_objects.points.Point;
 import geometry_objects.points.PointDatabase;
 import input.components.FigureNode;
-import preprocessor.delegates.ImplicitPointPreprocessor;
 import input.InputFacade;
 
 class TriangleIdentifierTest
@@ -302,10 +301,10 @@ class TriangleIdentifierTest
 		// Implied minimal segments: 4 in this figure.
 		//
 		Point f_star = _points.getPoint(2.49122807018, 3.43859649123);
-		Point g_star = _points.getPoint(3.527 , 3.309);
-		Point h_star = _points.getPoint(2.174, 1.217);
-		Point i_star = _points.getPoint(2.941, 0.707);
-		Point j_star = _points.getPoint(3.806 , 1.355);
+		Point g_star = _points.getPoint(3.52727272727 ,3.30909090909);
+		Point h_star = _points.getPoint(2.173913043, 1.217391304);
+		Point i_star = _points.getPoint(2.941176471, 0.7058823529);
+		Point j_star = _points.getPoint(3.806451613 , 1.3548387);
 
 		
 		
@@ -339,12 +338,15 @@ class TriangleIdentifierTest
 		
 		Segment f_star_g_star = new Segment(f_star, g_star);
 		Segment f_star_h_star = new Segment(f_star, h_star);
+		Segment h_star_i_star = new Segment(h_star, i_star);
+		Segment i_star_j_star = new Segment(i_star, j_star);
+		Segment g_star_j_star = new Segment(g_star, j_star);
+
 
 		//
 		// Non-minimal, computed segments: 2 in this figure.
 		//
-		//Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
-		//Segment ae = new Segment(_points.getPoint("A"), _points.getPoint("E"));
+		
 
 		//
 		// Triangles we expect to find
@@ -381,7 +383,7 @@ class TriangleIdentifierTest
 			expectedTriangles.add(new Triangle(Arrays.asList(ad , j_star_d, j_star_a)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ae , f_star_e, f_star_a)));
 			expectedTriangles.add(new Triangle(Arrays.asList(ae , i_star_e, i_star_a)));
-			
+			expectedTriangles.add(new Triangle(Arrays.asList(ae , h_star_e, h_star_a)));
 			
 			
 			expectedTriangles.add(new Triangle(Arrays.asList(bc , g_star_c, g_star_b)));
@@ -398,12 +400,16 @@ class TriangleIdentifierTest
 			expectedTriangles.add(new Triangle(Arrays.asList(ce , i_star_c, i_star_e)));
 			
 			
-			expectedTriangles.add(new Triangle(Arrays.asList(de , f_star_e, f_star_d)));
-			expectedTriangles.add(new Triangle(Arrays.asList(de , g_star_e, j_star_d)));
-			expectedTriangles.add(new Triangle(Arrays.asList(de , h_star_d, i_star_e)));
+			expectedTriangles.add(new Triangle(Arrays.asList(de , f_star_d, f_star_e)));
+			expectedTriangles.add(new Triangle(Arrays.asList(de , g_star_d, g_star_e)));
+			expectedTriangles.add(new Triangle(Arrays.asList(de , h_star_d, h_star_e)));
 			
 			
-
+			expectedTriangles.add(new Triangle(Arrays.asList(h_star_a , i_star_a, h_star_i_star)));
+			expectedTriangles.add(new Triangle(Arrays.asList(i_star_b , j_star_b, i_star_j_star)));
+			expectedTriangles.add(new Triangle(Arrays.asList(g_star_c , j_star_c, g_star_j_star)));
+			expectedTriangles.add(new Triangle(Arrays.asList(f_star_d , g_star_d, f_star_g_star)));
+			expectedTriangles.add(new Triangle(Arrays.asList(f_star_e , h_star_e, f_star_h_star)));
 			
 
 			
@@ -423,7 +429,7 @@ class TriangleIdentifierTest
 	@Test
 	void test_lineseg()
 	{
-		init("jsonfiles/lineseg.json");
+		init("jsonfiles/lineseg.json") ;
 
 		TriangleIdentifier triIdentifier = new TriangleIdentifier(_segments);
 

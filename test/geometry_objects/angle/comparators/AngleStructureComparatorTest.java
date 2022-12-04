@@ -22,7 +22,7 @@ class AngleStructureComparatorTest {
 	}
 	
 	@Test
-	void LeftLongerBothSides() throws FactException {
+	void RightLongerBothSides() throws FactException {
 		Point P1 = new Point(3,5);
 		Point P2 = new Point(0,2);
 		Point P3 = new Point(0,6);
@@ -36,12 +36,33 @@ class AngleStructureComparatorTest {
 		
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
+		System.out.print(angle1.compareTo(angle2));
+		
 		assertEquals(-1, ASC.compare(angle1, angle2));
+
+	}
+
+	@Test
+	void testTest() throws FactException {
+		Point P1 = new Point(3,5);
+		Point P2 = new Point(0,2);
+		Point P3 = new Point(0,6);
+		
+		Angle angle2 = angleBuilder(P1, P2, P3);
+		
+		Point P4 = new Point(5,7);
+		Point P5 = new Point(0,8);
+		
+		Angle angle1 = angleBuilder(P4, P2, P5);
+		
+		AngleStructureComparator ASC = new AngleStructureComparator();
+		
+		assertEquals(-1, ASC.compare(angle2, angle1));
 
 	}
 	
 	@Test
-	void RightLongerBothSides() throws FactException {
+	void LeftLongerBothSides() throws FactException {
 		Point P1 = new Point(3,5);
 		Point P2 = new Point(0,2);
 		Point P3 = new Point(0,6);
@@ -78,7 +99,7 @@ class AngleStructureComparatorTest {
 	
 	//Left Bigger on one side, same on other
 	@Test
-	void LeftLongerOneSide() throws FactException {
+	void RightLongerOneSide() throws FactException {
 		Point P1 = new Point(3,5);
 		Point P2 = new Point(0,2);
 		Point P3 = new Point(0,6);
@@ -97,20 +118,20 @@ class AngleStructureComparatorTest {
 	
 	//Right bigger on one side, equal on other
 	@Test
-	void RightLongerOneSide() throws FactException {
+	void LeftLongerOneSide() throws FactException {
 		Point P1 = new Point(3,5);
 		Point P2 = new Point(0,2);
 		Point P3 = new Point(0,6);
 		
-		Angle angle1 = angleBuilder(P1, P2, P3);
+		Angle angle2 = angleBuilder(P1, P2, P3);
 		
 		Point P4 = new Point(5,7);
 		
-		Angle angle2 = angleBuilder(P4, P2, P3);
+		Angle angle1 = angleBuilder(P4, P2, P3);
 		
 		AngleStructureComparator ASC = new AngleStructureComparator();
 		
-		assertEquals(1, ASC.compare(angle2, angle1));
+		assertEquals(1, ASC.compare(angle1, angle2));
 
 	}
 	
@@ -129,6 +150,8 @@ class AngleStructureComparatorTest {
 		Angle angle2 = angleBuilder(P4, P2, P5);
 		
 		AngleStructureComparator ASC = new AngleStructureComparator();
+		
+		System.out.print(angle1.compareTo(angle2));
 		
 		assertEquals(0, ASC.compare(angle1, angle2));
 

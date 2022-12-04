@@ -60,27 +60,37 @@ public class AngleStructureComparator implements Comparator<Angle>
 	{
 		
 		
-		if (left == null || right == null) {
-			return Integer.MAX_VALUE;
-		}
+		if (left == null || right == null) {return Integer.MAX_VALUE;}
 		
-		//Check that the angles are structurally equivalent
-        if (!(left.overlays(right))){
-        	
-        	return Integer.MAX_VALUE;
+		
+		  //Check that the angles are structurally equivalent 
+		if (!(left.overlays(right))){ return Integer.MAX_VALUE; }
+		 
+        
+        if (left.equals(right)) {return 1;}
+		
+		  //Left angle is bigger than the right 
+        if (left.getRay1().HasSubSegment(right.getRay1()) || left.getRay1().HasSubSegment(right.getRay2())) {
+        	if (left.getRay2().HasSubSegment(right.getRay1()) || left.getRay2().HasSubSegment(right.getRay2())) {
+        		return 1;
+        	}
         }
         
-        //Left angle is bigger than the right
-        
-        if (left.compareTo(right) > 0) {
-        	return 1;
-        }
-        
-      //Left angle is smaller than the right
-        if (left.compareTo(right) < 0) {
-        	return -1;
+        if (right.getRay1().HasSubSegment(left.getRay1()) || right.getRay1().HasSubSegment(left.getRay2())) {
+        	if (right.getRay2().HasSubSegment(left.getRay1()) || right.getRay2().HasSubSegment(left.getRay2())) {
+        		return -1;
+        	}
         }
         return 0;
-     
+        
+        
+		/*
+		 * if (left.overlays(right)) {return 1;}
+		 * 
+		 * if (right.overlays(left)) {return -1;}
+		 * 
+		 * return 0;
+		 * 
+		 */
 	}
 }

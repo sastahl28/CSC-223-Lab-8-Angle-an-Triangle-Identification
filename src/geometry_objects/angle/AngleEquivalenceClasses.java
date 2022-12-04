@@ -33,22 +33,24 @@ public class AngleEquivalenceClasses extends EquivalenceClasses<Angle>
 	 @Override
 	 public boolean add(Angle element) {
 			
-			int index = indexOfClass(element);
+		if (element == null) return false; 
+		 
+		int index = indexOfClass(element);
 			
-			//If the the location of the class does not exist, create a new LinkedEquivalenceClass to add the element to
-			if (index == -1) {
+		//If the the location of the class does not exist, create a new LinkedEquivalenceClass to add the element to
+		if (index == -1) {
 				
-				AngleLinkedEquivalenceClass tempClass = new AngleLinkedEquivalenceClass();
+			AngleLinkedEquivalenceClass tempClass = new AngleLinkedEquivalenceClass();
 				
-				tempClass.add(element);
+			tempClass.add(element);
 				
-				_classes.add(tempClass);
+			_classes.add(tempClass);
 				
-				return true;
-			}
+			return true;
+		}
 			
-			//if the class does exist, add the element to it
-			return _classes.get(index).add(element);	
+		//if the class does exist, add the element to it
+		return _classes.get(index).add(element);	
 			
 			
 		}

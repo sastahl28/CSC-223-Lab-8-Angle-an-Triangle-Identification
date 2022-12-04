@@ -103,7 +103,6 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		AEC.add(angle2);
 		
 		assertTrue(AEC.add(angle1));
-		assertEquals(AEC.canonical(), angle1);
 		assertTrue(AEC.contains(angle1));
 		assertTrue(AEC.contains(angle2));
 		
@@ -156,10 +155,25 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		
 		Angle angle2 = angleBuilder(P4, P1, P5);
 		
+		Angle angle3 = null;
+		
 		
 		assertFalse(AEC.add(angle2));
 		assertTrue(AEC.contains(angle1));
 		assertFalse(AEC.contains(angle2));
+		assertFalse(AEC.add(angle3));
+		
+	}
+	
+	@Test
+	void nullAngle() throws FactException {
+		
+		AngleLinkedEquivalenceClass AEC = new AngleLinkedEquivalenceClass();
+
+		
+		Angle angle3 = null;
+
+		assertFalse(AEC.add(angle3));
 		
 	}
 	

@@ -21,34 +21,46 @@ public Angle angleBuilder(Point P1, Point P2, Point P3) throws FactException {
 		
 	}
 	
-@Test
-void AddWithNoCanonical() throws FactException {
+	@Test
+	void AddWithNoCanonical() throws FactException {
 	
-	AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
+		AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
 	
-	Point P1 = new Point(3,6);
-	Point P2 = new Point(0,0);
-	Point P3 = new Point(0,6);
+		Point P1 = new Point(3,6);
+		Point P2 = new Point(0,0);
+		Point P3 = new Point(0,6);
 	
-	Angle angle1 = angleBuilder(P1,P2,P3);
+		Angle angle1 = angleBuilder(P1,P2,P3);
 	
-	Point P4 = new Point(2,2);
+		Point P4 = new Point(2,2);
 	
-	Angle angle2 = angleBuilder(P4,P1,P3);
+		Angle angle2 = angleBuilder(P4,P1,P3);
 	
-	assertTrue(AEC.add(angle1));	
-	assertFalse(AEC.add(angle1));	
+		assertTrue(AEC.add(angle1));	
+		assertFalse(AEC.add(angle1));	
 	
-	assertEquals(AEC.size(), 1);
-	assertTrue(AEC.contains(angle1));
+		assertEquals(AEC.size(), 1);
+		assertTrue(AEC.contains(angle1));
 	
-	assertFalse(AEC.contains(angle2));
+		assertFalse(AEC.contains(angle2));
 	
-}
+	}
 
-//add element larger than the canonical
-@Test
-void AddWithCanonical() throws FactException {
+	@Test
+	void nullAngle() throws FactException {
+	
+		AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
+
+	
+		Angle angle3 = null;
+
+		assertFalse(AEC.add(angle3));
+	
+	}
+
+	//add element larger than the canonical
+	@Test
+	void AddWithCanonical() throws FactException {
 	
 	AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
 	
@@ -72,64 +84,64 @@ void AddWithCanonical() throws FactException {
 	assertTrue(AEC.contains(angle1));
 	assertTrue(AEC.contains(angle2));
 	
-}
+	}
 
-@Test
-void TwoClasses() throws FactException {
+	@Test
+	void TwoClasses() throws FactException {
 	
-	AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
+		AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
 	
-	Point P1 = new Point(3,6);
-	Point P2 = new Point(0,0);
-	Point P3 = new Point(0,6);
+		Point P1 = new Point(3,6);
+		Point P2 = new Point(0,0);
+		Point P3 = new Point(0,6);
 	
-	Angle angle1 = angleBuilder(P1,P2,P3);
+		Angle angle1 = angleBuilder(P1,P2,P3);
 	
-	AEC.add(angle1);
+		AEC.add(angle1);
 	
-	Point P4 = new Point(4,8);
-	Point P5 = new Point(0,6);
+		Point P4 = new Point(4,8);
+		Point P5 = new Point(0,6);
 	
-	Angle angle2 = angleBuilder(P4, P1, P5);
+		Angle angle2 = angleBuilder(P4, P1, P5);
 	
 	
-	assertTrue(AEC.add(angle2));
+		assertTrue(AEC.add(angle2));
 	
-	assertEquals(AEC.size(), 2);
-	assertEquals(AEC.numClasses(), 2);
-	assertTrue(AEC.contains(angle1));
-	assertTrue(AEC.contains(angle2));
+		assertEquals(AEC.size(), 2);
+		assertEquals(AEC.numClasses(), 2);
+		assertTrue(AEC.contains(angle1));
+		assertTrue(AEC.contains(angle2));
 	
-}
+	}
 
-@Test
-void SmallerAngle() throws FactException {
+	@Test
+	void SmallerAngle() throws FactException {
 	
-	AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
+		AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
 	
-	Point P1 = new Point(3,6);
-	Point P2 = new Point(0,0);
-	Point P3 = new Point(0,6);
+		Point P1 = new Point(3,6);
+		Point P2 = new Point(0,0);
+		Point P3 = new Point(0,6);
 	
-	Angle angle1 = angleBuilder(P1,P2,P3);
+		Angle angle1 = angleBuilder(P1,P2,P3);
 	
 	
-	Point P4 = new Point(4,8);
-	Point P5 = new Point(0,7);
+		Point P4 = new Point(4,8);
+		Point P5 = new Point(0,7);
 	
-	Angle angle2 = angleBuilder(P4, P2, P5);
+		Angle angle2 = angleBuilder(P4, P2, P5);
 	
-	AEC.add(angle2);
+		AEC.add(angle2);
 	
-	assertTrue(AEC.add(angle1));
-	assertEquals(AEC.size(), 2);
-	assertEquals(AEC.numClasses(), 1);
-	assertTrue(AEC.contains(angle1));
-	assertTrue(AEC.contains(angle2));
+		assertTrue(AEC.add(angle1));
+		assertEquals(AEC.size(), 2);
+		assertEquals(AEC.numClasses(), 1);
+		assertTrue(AEC.contains(angle1));
+		assertTrue(AEC.contains(angle2));
 	
-}
+	}
 
-//add element smaller than the canonical
+	//add element smaller than the canonical
 	@Test
 	void BiggerSmallerAngle() throws FactException {
 			
@@ -154,6 +166,41 @@ void SmallerAngle() throws FactException {
 		assertEquals(1, AEC.numClasses());
 		assertTrue(AEC.contains(angle1));
 		assertTrue(AEC.contains(angle2));
-		}
+	}
+	
+	@Test
+	void ThreeClasses() throws FactException {
+	
+		AngleEquivalenceClasses AEC = new AngleEquivalenceClasses();
+	
+		Point P1 = new Point(3,6);
+		Point P2 = new Point(0,0);
+		Point P3 = new Point(0,6);
+	
+		Angle angle1 = angleBuilder(P1,P2,P3);
+	
+		AEC.add(angle1);
+	
+		Point P4 = new Point(4,8);
+		Point P5 = new Point(0,6);
+	
+		Angle angle2 = angleBuilder(P4, P1, P5);
+		
+		Point p6 = new Point(6,3);
+		Point p7 = new Point(1,1);
+		
+		Angle angle3 = angleBuilder(p6,p7, P1);
+	
+		assertTrue(AEC.add(angle2));
+		assertTrue(AEC.add(angle3));
+	
+		assertEquals(AEC.size(), 3);
+		assertEquals(AEC.numClasses(), 3);
+		assertTrue(AEC.contains(angle1));
+		assertTrue(AEC.contains(angle2));
+		assertTrue(AEC.contains(angle3));
+		
+	
+	}
 
 }

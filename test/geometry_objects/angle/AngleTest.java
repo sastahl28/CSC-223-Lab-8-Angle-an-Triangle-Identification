@@ -24,7 +24,7 @@ class AngleTest {
 
 	//create segments
 	Segment ab = new Segment(a , b);
-	Segment ac = new Segment( a, c);
+	Segment ac = new Segment(a, c);
 	Segment bg = new Segment(b ,g);
 
 	Segment de = new Segment(d ,e);

@@ -234,7 +234,6 @@ class AngleIdentifierTest
 		Segment ac = new Segment(_points.getPoint("A"), _points.getPoint("C"));
 		Segment ad = new Segment(_points.getPoint("A"), _points.getPoint("D"));
 		Segment ae = new Segment(_points.getPoint("A"), _points.getPoint("E"));
-		//Segment af = new Segment(_points.getPoint("A"), _points.getPoint("F"));
 		
 		Segment bc = new Segment(_points.getPoint("B"), _points.getPoint("C"));
 		Segment bd = new Segment(_points.getPoint("B"), _points.getPoint("D"));

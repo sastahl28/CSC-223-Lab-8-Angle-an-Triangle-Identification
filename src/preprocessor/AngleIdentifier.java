@@ -1,17 +1,11 @@
 package preprocessor;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import exceptions.FactException;
 import geometry_objects.Segment;
-import geometry_objects.Triangle;
-import geometry_objects.points.Point;
-import geometry_objects.points.PointDatabase;
-import preprocessor.delegates.ImplicitPointPreprocessor;
 import geometry_objects.angle.Angle;
 import geometry_objects.angle.AngleEquivalenceClasses;
 

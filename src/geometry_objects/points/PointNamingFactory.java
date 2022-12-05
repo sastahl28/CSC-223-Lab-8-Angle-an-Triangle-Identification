@@ -67,7 +67,7 @@ public class PointNamingFactory
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @return String - name of the point
@@ -75,7 +75,7 @@ public class PointNamingFactory
 	public String getCurrName() {
 		return this.getCurrentName();
 	}
-	
+
 	/**
 	 * 
 	 * @return int the number of letters in the current name
@@ -91,28 +91,29 @@ public class PointNamingFactory
 	 */
 	public Point put(Point pt)
 	{
+		System.out.println("hello");
 		Point point;
 		// Check if the point already exists in the database
 		if (!contains(pt)) {
 			// Check if the point is named
 			if (pt.isUnnamed()) {
 				// If it isn't then look up existing and generate a name
-				 point = lookupExisting(this.getCurrentName(), pt._x, pt.getY());
-				 // Add to the database and return
+				point = new Point(this.getCurrentName(), pt.getX(), pt.getY());
+				// Add to the database and return
 				_database.put(point, point);
 				return point;
 			}
-		// If the point is named then add it to the database 
-		point = lookupExisting(pt.getName(), pt._x, pt.getY());
-		_database.put(point, point);
-		return point;
-			
+			// If the point is named then add it to the database 
+			point = new Point(pt.getName(), pt.getX(), pt.getY());
+			_database.put(point, point);
+			return point;
 		}
-		
+
 		// If the point is in the database then get and return it.
 		return _database.get(pt);
 	}
 
+	
 	/**
 	 * @param x -- single coordinate
 	 * @param y -- single coordinate
@@ -120,12 +121,16 @@ public class PointNamingFactory
 	 */
 	public Point put(double x, double y)
 	{
+		System.out.println("HI");
+		if(!this.contains(x, y)) {
+			Point point = new Point(getCurrentName(), x, y);
+			_database.put(point, point);
+			return point;
+		}
 		// see if the point exists 
-		Point point = lookupExisting(getCurrentName(), x, y);
-		_database.put(point, point);
-		
-		return point;
-		
+
+		return this.get(x, y);
+
 	}
 
 	/**
@@ -142,14 +147,36 @@ public class PointNamingFactory
 	 *         The exception is that a valid name can overwrite an unnamed point.
 	 */
 	public Point put(String name, double x, double y) {
-		Point point;
-		if (name == null) { 
-			point = lookupExisting(getCurrentName(), x, y);
-			return put(x, y);
+		System.out.println("hey");
+		if(name==null) {name = getCurrentName();}
+		
+		
+		if(this.contains(x,y)) {
+			System.out.println("Me");
+			if(this.get(x, y)._name == null) {
+				this.get(x, y)._name = name;
+				return this.get(x,y);
+				}
+			
+			
+			if(this.get(x, y)._name.equals(name)) {
+				return this.get(x,y);
+						
+			}
+			return this.get(x, y);
 		}
-		point = lookupExisting(name, x, y);
-		_database.put(point, point);
-		return point;
+		
+		if(!this.contains(x,y)) {
+			System.out.println("No me!");
+			Point p = new Point(name , x ,y);
+			System.out.println(name);
+			_database.put(p, p);
+
+			return p;
+			
+		}
+		
+		return null;
 	}    
 
 	/**
@@ -187,11 +214,11 @@ public class PointNamingFactory
 	{
 		// TODO
 		if (!contains(x, y)) { return createNewPoint(name, x, y); }
-		
+
 		Point p = get(x,y);
 		if(p.isUnnamed()) {
 			p._name = name;
-			
+
 		}
 		return p;
 	}
@@ -212,11 +239,11 @@ public class PointNamingFactory
 	private Point createNewPoint(String name, double x, double y)
 	{
 		if (contains(x, y)) { return get(x, y); }
-		
+
 		Point point = new Point(name, x, y);
-		
+
 		return point;
-		
+
 	}
 
 	/**
@@ -245,15 +272,15 @@ public class PointNamingFactory
 	private void updateName() {
 		char currChar = _currentName.charAt(0);
 		StringBuilder sb = new StringBuilder();
-		
-	
+
+
 		if (currChar == END_LETTER) {
 			_numLetters++;
 			for (int i = 0; i < _numLetters; i++) {
 				sb.append(START_LETTER);
 			}
 		}
-		
+
 		else {
 			currChar++;
 			for (int i = 0; i < _numLetters; i++) {
@@ -269,7 +296,7 @@ public class PointNamingFactory
 	 */
 	public  Set<Point> getAllPoints()
 	{
-        return _database.keySet();
+		return _database.keySet();
 	}
 
 	public void clear() { _database.clear(); }
@@ -278,15 +305,15 @@ public class PointNamingFactory
 	@Override
 	public String toString()
 	{
-        Set<Point> points = getAllPoints();
-        StringBuilder sb = new StringBuilder();
-        
-        for (Point p : points) {
-        	String pointStr = "Name: " + p.getName() + ", X : " + p.getX() + ", Y : " + p.getY() + "\n";
-        	sb.append(pointStr);
-        	
-        }
-        
-        return sb.toString();	
+		Set<Point> points = getAllPoints();
+		StringBuilder sb = new StringBuilder();
+
+		for (Point p : points) {
+			String pointStr = "Name: " + p.getName() + ", X : " + p.getX() + ", Y : " + p.getY() + "\n";
+			sb.append(pointStr);
+
+		}
+
+		return sb.toString();	
 	}
 }
